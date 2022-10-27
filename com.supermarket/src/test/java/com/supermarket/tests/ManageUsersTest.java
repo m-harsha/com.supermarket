@@ -11,7 +11,7 @@ public class ManageUsersTest extends Base {
 	ManageUsersPage manageuser;
 	
 	@Test
-	public void verify_manageUserStatusDeactivation() {
+	public void verify_ManageUserStatusDeactivation() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		manageuser=new ManageUsersPage(driver);
@@ -20,7 +20,7 @@ public class ManageUsersTest extends Base {
     }
 	
 	@Test
-	public void verify_manageUserActionDeactivation() {
+	public void verify_ManageUserActionDeactivation() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		manageuser=new ManageUsersPage(driver);
