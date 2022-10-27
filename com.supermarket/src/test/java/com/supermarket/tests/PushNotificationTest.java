@@ -29,8 +29,7 @@ public class PushNotificationTest extends Base {
 		
 		pdfreader=new PdfReader();
 		map=pdfreader.readPdf_Data("pushnotificationdatas");
-		System.out.println(map.get("title 1"));
-		//System.out.println(map);		
+			
 	}
 	
 	@Test(dataProvider="pushnotification",dataProviderClass=DataProviderClass.class)
