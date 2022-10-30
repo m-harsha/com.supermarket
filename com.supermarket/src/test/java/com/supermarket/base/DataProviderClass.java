@@ -14,5 +14,9 @@ public class DataProviderClass {
 		return new Object [][] {{"Ammu","ammu@gmail.com","986546753","werty","amu","sfge"},{"Nikila","niku@gmail.com","6789324509","niku","erh","rtyry"}};	
 	}
 	
+	@DataProvider (name="ManageExpenseCategory")
+	public  Object[][]  expensetitle() {
+		return new Object [][] {{"orange"},{"apple1"}};	
+	}
 	
 }

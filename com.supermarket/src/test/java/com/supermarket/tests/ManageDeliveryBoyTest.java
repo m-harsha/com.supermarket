@@ -17,7 +17,7 @@ public class ManageDeliveryBoyTest extends Base {
 	ManageDeliveryBoyPage deliveryboypage;
 	
 	@Test
-	public void verify_add_NewDeliveryBoy() {
+	public void verify_Add_NewDeliveryBoy() {
 		String name;
     	String email;
     	String phone;
@@ -35,9 +35,9 @@ public class ManageDeliveryBoyTest extends Base {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		deliveryboypage=new ManageDeliveryBoyPage(driver);
-		deliveryboypage.Create_DeliveryBoy(name,email,phone,address,userName,password);
+		deliveryboypage.create_DeliveryBoy(name,email,phone,address,userName,password);
 		System.out.println(deliveryboypage.get_DangerAlertMessageNotification());
-		Assert.assertTrue(deliveryboypage.AlertMessage_isDisplayed());
+		Assert.assertTrue(deliveryboypage.alertMessage_isDisplayed());
 	}
 	
 	@Test
@@ -45,7 +45,7 @@ public class ManageDeliveryBoyTest extends Base {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		deliveryboypage=new ManageDeliveryBoyPage(driver);
-		deliveryboypage.Create_DeliveryBoy("Ami","ami@gmail.com","897565634","erty2y","ana","wet87");
+		deliveryboypage.create_DeliveryBoy("Ami","ami@gmail.com","897565634","erty2y","ana","wet87");
 		String expectedresult=Constants.EXPECTED_ALERT_TEXT1;
 		String actualresult=deliveryboypage.get_DangerAlertMessageNotification();
 		System.out.println(actualresult);
@@ -58,7 +58,9 @@ public class ManageDeliveryBoyTest extends Base {
 		loginpage.login();
 		deliveryboypage=new ManageDeliveryBoyPage(driver);
 		deliveryboypage.clickOnDeliveryBoy();
-		deliveryboypage.deactivate_UserStatus("ann");	
+		deliveryboypage.deactivate_UserStatus("name");
+		System.out.println(deliveryboypage.get_AlertMessageNotification());
+		Assert.assertTrue(deliveryboypage.is_DeactivateActionAlertMessageDisplayed());		
     }	
 	
 	@Test
@@ -68,10 +70,11 @@ public class ManageDeliveryBoyTest extends Base {
 		deliveryboypage=new ManageDeliveryBoyPage(driver);
 		deliveryboypage.clickOnDeliveryBoy();
 		deliveryboypage.delete_DeliveryBoy("Aimy");
+		Assert.assertTrue(deliveryboypage.deleteAlertMessage_isDisplayed());
     }
 	
 	@Test
-	public void verify_backGroundColorOfNewButton() {
+	public void verify_BackGroundColorOfNewButton() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		deliveryboypage=new ManageDeliveryBoyPage(driver);
@@ -83,7 +86,7 @@ public class ManageDeliveryBoyTest extends Base {
 	}
 	
 	@Test(dataProvider="DeliveryBoy",dataProviderClass=DataProviderClass.class)
-	public void create_DeliveryBoyDetailsbyDataproviderclass(String data1,String data2,String data3,String data4,String data5,String data6) {
+	public void create_DeliveryBoyDetailsByDataproviderclass(String data1,String data2,String data3,String data4,String data5,String data6) {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		deliveryboypage=new ManageDeliveryBoyPage(driver);
@@ -96,7 +99,10 @@ public class ManageDeliveryBoyTest extends Base {
 		deliveryboypage.enterUserName(data5);
 		deliveryboypage.enterPassword(data6);
 		deliveryboypage.click_SaveButton();	
+		Assert.assertTrue(deliveryboypage.is_SaveButtonDisplayed());
+		
     }
+	
 	
 }
 

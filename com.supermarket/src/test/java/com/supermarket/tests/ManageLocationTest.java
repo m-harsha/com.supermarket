@@ -15,7 +15,7 @@ public class ManageLocationTest extends Base {
 	ManageLocationPage managelocation;
 	
 	@Test
-	public void verify_add_NewLocationInformations() {
+	public void verify_Add_NewLocationInformations() {
 		String location;
 		String deliverycharge;
 		excel.setExcelFile("Location Details","LocationInformations");
@@ -27,7 +27,7 @@ public class ManageLocationTest extends Base {
 		managelocation=new ManageLocationPage(driver);
 		managelocation.ManageLocationDetails(location,deliverycharge);
 		System.out.println(managelocation.get_AlertMessageNotification());
-		Assert.assertTrue(managelocation.AlertMessage_isDisplayed());	
+		Assert.assertTrue(managelocation.alertMessage_isDisplayed());	
 	}
 	
 	@Test
@@ -41,6 +41,46 @@ public class ManageLocationTest extends Base {
 		System.out.println(actualresult);
 		Assert.assertEquals(actualresult, expectedresult,"This testcase failed");
 	}
-	
+	@Test
+	public void verify_LocationStatusDeactivation() {
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		managelocation=new ManageLocationPage(driver);
+		managelocation.clickOnManageLocation();
+		managelocation.deactivate_UserStatus("lkj");
+		System.out.println(managelocation.get_StatusAlertMessageNotification());
+		Assert.assertTrue(managelocation.statusAlertMessage_isDisplayed());		
+    }	
+	@Test
+	public void verify_DeleteLocationAction() {
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		managelocation=new ManageLocationPage(driver);
+		managelocation.clickOnManageLocation();
+		managelocation.delete_Location("kerala");
+		Assert.assertTrue(managelocation.deleteAlertMessage_isDisplayed());
+    }
+	@Test
+	public void verify_UpdateDetailsOfManageLocation() {
+		loginpage=new LoginPage(driver);
+		loginpage.login();	
+		managelocation=new ManageLocationPage(driver);
+		managelocation.clickOnManageLocation();	
+		managelocation.enter_StateDataUpdation();	
+		managelocation.updateButton();
+		Assert.assertTrue(managelocation.updatedAlertMessage_IsDisplayed());
+	}
+	@Test
+	public void verify_SearchedDataOfManageLocation() {
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		managelocation=new ManageLocationPage(driver);
+		managelocation.clickOnManageLocation();	
+		managelocation.clickSearchButton();
+		managelocation.search_CategoriesOfManageLocation();
+		managelocation.entersearchedLocation("tvm");
+		managelocation.click_SearchButtonManageLocation();
+		Assert.assertFalse(managelocation.searchButtonManageLocationIsSelected());	
+	}
 	
 }

@@ -19,6 +19,8 @@ public class ManageUsersPage {
 	
 	@FindBy(xpath="//i[@class='nav-icon fas fa-user']")
 	private WebElement manageusersLink;
+	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
+	private WebElement deactivateAlert;
 	
 	
 	public ManageUsersPage(WebDriver driver) {
@@ -72,8 +74,16 @@ public class ManageUsersPage {
 		 }
 		 WebElement deactivateactionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[6]//a)[2]"));
 		 deactivateactionButton.click();
-		
 		 driver.switchTo().alert().dismiss();
 		 
 	 }
+	 public boolean is_DeactivateActionAlertMessageDisplayed() {
+		 generalutility=new GeneralUtility(driver);
+    	 return generalutility.is_Displayed(deactivateAlert);
+	 }
+	 public String get_AlertMessageNotification() {
+	    	generalutility=new GeneralUtility(driver);
+	    	return generalutility.get_Text(deactivateAlert);
+	    }
+	 
 }

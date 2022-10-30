@@ -8,10 +8,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import com.supermarket.constants.Constants;
+import com.supermarket.utilities.ScreenShot;
 import com.supermarket.utilities.WaitUtility;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -21,6 +23,7 @@ public class Base {
 	public WebDriver driver;
 	Properties prop;
 	FileInputStream ip;
+	ScreenShot screenshot;
 	
    public Base(){
 	   
@@ -70,8 +73,13 @@ public class Base {
 		
 	}
 	@AfterMethod
-	public void tearDown() {
-		//driver.close();
+	public void tearDown(ITestResult itestresult) {
+		screenshot=new ScreenShot();
+		if(itestresult.getStatus()==ITestResult.FAILURE) {
+			String testcaseName=itestresult.getName();
+			screenshot.take_screenShot(driver,testcaseName);
+		
 	}
-
+		//driver.close();
+}
 }

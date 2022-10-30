@@ -53,6 +53,14 @@ public class PushNotificationPage {
 		return generalutility.get_Text(alertSuccessText);
 		
 	}
+	 public boolean is_AlertMessageDisplayed() {
+		 generalutility=new GeneralUtility(driver);
+    	 return generalutility.is_Displayed(alertSuccessText);
+	 }
+	 public boolean is_SaveButtonEnabled() {
+		 generalutility=new GeneralUtility(driver);
+    	 return generalutility.is_Displayed(sendButton);
+	 }
 	public String get_color_SendButton() {
 		 generalutility=new GeneralUtility(driver);
 		 return generalutility.get_CssValue(sendButton, "color");

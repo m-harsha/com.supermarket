@@ -26,25 +26,28 @@ public class PushNotificationTest extends Base {
 		pushnotificationpage.click_PushNotificationButton();
 		String actualtext=pushnotificationpage.get_SuccessAlertMessage("ab", "rt");
 		System.out.println(actualtext);
-		
+		Assert.assertTrue(pushnotificationpage.is_AlertMessageDisplayed());
 		pdfreader=new PdfReader();
 		map=pdfreader.readPdf_Data("pushnotificationdatas");
+		System.out.println(map.get("title 1"));
 			
 	}
 	
 	@Test(dataProvider="pushnotification",dataProviderClass=DataProviderClass.class)
-	public void create_pushNotificationDatabyDataproviderclass(String data1,String data2) {
+	public void create_PushNotificationDataByDataproviderclass(String data1,String data2) {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		pushnotificationpage=new PushNotificationPage(driver);
 		pushnotificationpage.click_PushNotificationButton();
 		pushnotificationpage.enter_TitleField(data1);
 		pushnotificationpage.enter_DescriptionField(data2);
-		pushnotificationpage.click_OnSend();		
+		pushnotificationpage.click_OnSend();	
+		Assert.assertTrue(pushnotificationpage.is_SaveButtonEnabled());
+		
 	}
 	
 	@Test
-	public void verify_colorofSendButton() {
+	public void verify_ColorOfSendButton() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		pushnotificationpage=new PushNotificationPage(driver);

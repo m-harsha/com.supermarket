@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.supermarket.tests.AdminUsersTest">
+      <class name="com.supermarket.tests.ManageExpenseCategoryTest">
         <methods>
+          <include name="ManageExpenseCategoryByDataproviderclass" invocation-numbers="0 1"/>
           <include name="setUp"/>
-          <include name="verify_LocationInformationTextAlertMessage"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- com.supermarket.tests.AdminUsersTest -->
+      </class> <!-- com.supermarket.tests.ManageExpenseCategoryTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

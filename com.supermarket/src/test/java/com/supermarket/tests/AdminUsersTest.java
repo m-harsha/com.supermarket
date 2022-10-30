@@ -16,7 +16,16 @@ public class AdminUsersTest extends Base {
 	AdminUsersPage adminuserspage;
 	
 	@Test
-	public void verify_add_NewAdminUsers() {
+	public void verify_AdminUsersLogo() {
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		adminuserspage=new AdminUsersPage(driver);
+		adminuserspage.clickOnAdminUsers();
+		Assert.assertTrue(adminuserspage.logoSymbolOfAdminUsers_IsDisplayed());		
+	}
+	
+	@Test
+	public void verify_Add_NewAdminUsers() {
 		String userName;
 		String password;
 		excel.setExcelFile("Admin Users Details","AdminUsersInformations");
@@ -26,21 +35,22 @@ public class AdminUsersTest extends Base {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
-		adminuserspage.AdminUsersDetails(userName,password);
+		adminuserspage.adminUsersDetails(userName,password);
 		System.out.println(adminuserspage.get_DangerAlertMessageNotification());
-		Assert.assertTrue(adminuserspage.AlertMessage_isDisplayed());
+		Assert.assertTrue(adminuserspage.alertMessage_isDisplayed());
 	}
 	
 	@Test
-	public void verify_LocationInformationTextAlertMessage() {
+	public void verify_AdminUsersTextAlertMessage() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		adminuserspage=new AdminUsersPage(driver);
-		adminuserspage.AdminUsersDetails("ani", "ani345");
+		adminuserspage.adminUsersDetails("ani", "ani345");
 		String expectedresult=Constants.EXPECTED_ALERTTEXT3;
 		String actualresult=adminuserspage.get_DangerAlertMessageNotification();
 		System.out.println(actualresult);
 		Assert.assertEquals(actualresult, expectedresult,"This testcase failed");
 	}
+	
  
 }

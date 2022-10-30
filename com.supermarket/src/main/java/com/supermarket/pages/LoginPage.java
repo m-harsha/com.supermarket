@@ -24,6 +24,10 @@ public class LoginPage {
 	private WebElement profileImage;
 	@FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']")		
 	private WebElement alertMessage;
+	@FindBy(xpath="//input[@id='remember']")		
+	private WebElement rememeberMe;
+	@FindBy(xpath="//label[@for='remember']")		
+	private WebElement rememeberMeLabel;
 		
 	public LoginPage(WebDriver driver) {
 		this.driver=driver;
@@ -61,6 +65,13 @@ public class LoginPage {
     public String get_AlertMessageNotification() {
     	generalutility=new GeneralUtility(driver);
     	return generalutility.get_Text(alertMessage);
+    }
+    public void click_OnRememberMeCheckBox() {
+    	rememeberMeLabel.click();
+    }
+    public boolean is_RememeberMeSelected() {
+    	generalutility=new GeneralUtility(driver);
+    	return generalutility.is_Selected(rememeberMe);
     }
    
 

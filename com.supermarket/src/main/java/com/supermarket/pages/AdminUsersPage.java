@@ -14,16 +14,18 @@ public class AdminUsersPage {
 	PageUtility pageutility;
 	GeneralUtility generalutility;
 	
+	@FindBy(xpath="//i[@class='nav-icon fas fa-users']")		
+	private WebElement logoSymbol;
 	@FindBy(xpath="//i[@class='nav-icon fas fa-users']")
 	private WebElement adminUsersLink;
 	@FindBy(xpath="//a[@class='btn btn-rounded btn-danger']")
-	private WebElement NewButton;
+	private WebElement newButton;
 	@FindBy(xpath="//input[@id='username']")
-	private WebElement UserName;
+	private WebElement userName;
 	@FindBy(xpath="//input[@id='password']")
 	private WebElement Password;
 	@FindBy(xpath="//select[@id='user_type']")
-	private WebElement UserType;
+	private WebElement userType;
 	@FindBy(xpath="//button[@name='Create']")
 	private WebElement saveButton;
 	@FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']")		
@@ -33,26 +35,31 @@ public class AdminUsersPage {
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}
+	
+	public boolean logoSymbolOfAdminUsers_IsDisplayed() {
+		generalutility=new GeneralUtility(driver);
+		return generalutility.is_Displayed(logoSymbol);		
+	}
 	public void clickOnAdminUsers() {
 		adminUsersLink.click();
 	}
 	public void clickOnNewButton() {
-		NewButton.click();
+		newButton.click();
 	}
 	public void enterUserName(String username) {
-	    UserName.sendKeys(username);
+	    userName.sendKeys(username);
 	}	    
 	public void enterPassword(String password) {
 	    Password.sendKeys(password);
 	}
 	public void enterUserType() {
     	pageutility=new PageUtility(driver);
-    	pageutility.select_ByIndex(2,UserType);
+    	pageutility.select_ByIndex(2,userType);
     }
 	public void clickOnSaveButton() {
 		saveButton.click();
 	}
-	public void AdminUsersDetails(String userName,String password) {
+	public void adminUsersDetails(String userName,String password) {
 		clickOnAdminUsers();
 		clickOnNewButton();
 		enterUserName(userName);
@@ -64,7 +71,7 @@ public class AdminUsersPage {
 	    generalutility=new GeneralUtility(driver);
 	    return generalutility.get_Text(alertMessage);
 	}
-	public boolean AlertMessage_isDisplayed() {
+	public boolean alertMessage_isDisplayed() {
  	    generalutility=new GeneralUtility(driver);
  	    return generalutility.is_Displayed(alertMessage);
     }

@@ -17,9 +17,9 @@ public class ManageDeliveryBoyPage {
 	GeneralUtility generalutility;
 	
 	@FindBy(xpath="//i[@class='nav-icon fas fa-user-plus']")
-	private WebElement ManageDeliveryBoy;
+	private WebElement manageDeliveryBoy;
 	@FindBy(xpath="//a[@class='btn btn-rounded btn-danger']")
-	private WebElement NewButton;
+	private WebElement newButton;
 	@FindBy(xpath="//input[@id='name']")
 	private WebElement Name;
 	@FindBy(xpath="//input[@id='email']")
@@ -33,19 +33,23 @@ public class ManageDeliveryBoyPage {
 	@FindBy(xpath="//input[@id='password']")
 	private WebElement PassWord;
 	@FindBy(xpath="//button[@class='btn btn-danger']")
-	private WebElement SaveButton;
+	private WebElement saveButton;
 	@FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']")
 	private WebElement alertMessage;
+	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
+	private WebElement deactivateAlert;
+	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
+	private WebElement deleteAlert;
 	
 	public ManageDeliveryBoyPage(WebDriver driver) {
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}
     public void clickOnDeliveryBoy() {
-	    ManageDeliveryBoy.click();	
+	    manageDeliveryBoy.click();	
 	}
     public void clickOnNewButton() {
-    	NewButton.click();
+    	newButton.click();
     } 
     public void enterName(String name) {
     	Name.sendKeys(name);
@@ -67,9 +71,13 @@ public class ManageDeliveryBoyPage {
     }
     public void click_SaveButton() {
     	pageutility=new PageUtility(driver);
-    	pageutility.scrollAndClick(SaveButton); 	
+    	pageutility.scrollAndClick(saveButton); 	
     }   
-    public void Create_DeliveryBoy(String name,String email,String phone,String address,String UserName, String password) {
+    public boolean is_SaveButtonDisplayed() {
+		 generalutility=new GeneralUtility(driver);
+   	     return generalutility.is_Displayed(saveButton);
+	 }
+    public void create_DeliveryBoy(String name,String email,String phone,String address,String UserName, String password) {
     	clickOnDeliveryBoy();
     	clickOnNewButton();
     	enterName(name);
@@ -80,7 +88,7 @@ public class ManageDeliveryBoyPage {
 		enterPassword(password);
 		click_SaveButton();
 	}  
-     public boolean AlertMessage_isDisplayed() {
+     public boolean alertMessage_isDisplayed() {
     	 generalutility=new GeneralUtility(driver);
     	 return generalutility.is_Displayed(alertMessage);
      }
@@ -117,13 +125,25 @@ public class ManageDeliveryBoyPage {
 		 }
 		 WebElement deactivateactionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[8]//a)[2]"));
 		 deactivateactionButton.click();
-		// driver.switchTo().alert().getText();
-		 driver.switchTo().alert().dismiss();	 
+		 driver.switchTo().alert().accept();	
+		 //driver.switchTo().alert().dismiss();	 
 	 }
 	 public String get_Backgroundcolor_NewButton() {
 		 generalutility=new GeneralUtility(driver);
-		 return generalutility.get_CssValue(NewButton, "background-color");
+		 return generalutility.get_CssValue(newButton, "background-color");
 	 }
+	 public boolean is_DeactivateActionAlertMessageDisplayed() {
+		 generalutility=new GeneralUtility(driver);
+    	 return generalutility.is_Displayed(deactivateAlert);
+	 }
+	 public String get_AlertMessageNotification() {
+	    generalutility=new GeneralUtility(driver);
+	    return generalutility.get_Text(deactivateAlert);
+	 }
+	 public boolean deleteAlertMessage_isDisplayed() {
+    	 generalutility=new GeneralUtility(driver);
+    	 return generalutility.is_Displayed(deleteAlert);
+     }
 }
 
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="parallelrun"> thread-count="2" parallel="tests">
+    <test name="smoke"
+        <classes>
+            <class name="com.supermarket.tests.LoginTest"></class>
+            <class name="com.supermarket.tests.PushNotificationTest"></class>
+
+         </classes>
+     </test>
+     <test name="regression">
+         <classes>
+             <class name="com.supermarket.tests.ManageDeliveryBoyTest"></class>
+             <class name="com.supermarket.tests.ManageExpenseTest"></class>
+
+         </classes>
+       </test>
+    </suite>

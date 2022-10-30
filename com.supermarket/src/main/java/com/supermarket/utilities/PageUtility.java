@@ -48,6 +48,7 @@ public class PageUtility {
 		Actions action=new Actions(driver);
 		action.doubleClick(element).build().perform();
 	}
+	
 	public void scrollAndClick(WebElement element) {
 		int x=0;
 		js=(JavascriptExecutor) driver;

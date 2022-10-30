@@ -22,6 +22,22 @@ public class ManageExpenseCategoryPage {
 	private WebElement saveButton;
 	@FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']")
 	private WebElement alertMessage;
+	@FindBy(xpath="(//tbody//tr[6]//td[2]//a)[1]")
+	private WebElement editExpenseCategoryData;
+	@FindBy(xpath="//button[@name='Update']")
+	private WebElement editUpdateButton;
+	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
+	private WebElement updatedAlertMessage;
+	@FindBy(xpath="(//tbody//tr[7]//td[2]//a)[2]")
+	private WebElement DeleteExpenseData;
+	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
+	private WebElement deleteAlert;
+	@FindBy(xpath="//a[@class='btn btn-rounded btn-primary']")
+	private WebElement searchButton;
+	@FindBy(xpath="//input[@id='un']")
+	private WebElement searchTitle;
+	@FindBy(xpath="//button[@name='Search']")
+	private WebElement searchData;
 	
 	public ManageExpenseCategoryPage(WebDriver driver) {
 		this.driver=driver;
@@ -43,7 +59,7 @@ public class ManageExpenseCategoryPage {
 	public void clickOnSaveButton() {
 		saveButton.click();	
     }
-	public void ExpenseCategoryDetails(String title) {
+	public void expenseCategoryDetails(String title) {
 		clickOnManageExpense();
 		clickOnExpenseCategory();
 		clickOnNewButton();
@@ -55,9 +71,56 @@ public class ManageExpenseCategoryPage {
 	    generalutility=new GeneralUtility(driver);
 	    return generalutility.get_Text(alertMessage);
 	 }
-	 public boolean AlertMessage_isDisplayed() {
+	 public boolean alertMessage_IsDisplayed() {
     	 generalutility=new GeneralUtility(driver);
     	 return generalutility.is_Displayed(alertMessage);
      }
+	 public boolean saveButtonIs_Selected() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.is_Selected(saveButton);
+	 }
+	
+	 public void click_EditOption() {
+		 editExpenseCategoryData.click();
+	 }
+	 public void enterUpdatedTitle(String title1) {
+		 click_EditOption();
+		 Title.clear();
+		 Title.sendKeys(title1);
+	}
+	 public void updateButton() {
+		 editUpdateButton.click();
+	 }
+	 public boolean updatedAlertMessage_IsDisplayed() {
+	  	 generalutility=new GeneralUtility(driver);
+	  	 return generalutility.is_Displayed(updatedAlertMessage);
+	 }
+	 public void delete_DataExpense() {
+		 DeleteExpenseData.click();
+		 driver.switchTo().alert().accept();
+		 //driver.switchTo().alert().dismiss();
+	 }
+	 public boolean deleteAlertMessage_isDisplayed() {
+	     generalutility=new GeneralUtility(driver);
+	  	 return generalutility.is_Displayed(deleteAlert);
+	 }
+	 public void clickSearchButton() {
+		 searchButton.click();	   
+	 }
+	 public void searchedTitle(String title) {
+		clickSearchButton();
+		searchTitle.sendKeys(title);
+     }
+	 public void click_SearchButtonExpenseCategory() {
+		 searchData.click();	
+     }
+	 public boolean searchButtonManageExpenseCategoryIsSelected() {
+  	    generalutility=new GeneralUtility(driver);
+  	    return generalutility.is_Selected(searchData);
+    }
+	 
+	 
+	 
+	 
 	
 }
