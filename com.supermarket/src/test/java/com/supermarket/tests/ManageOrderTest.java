@@ -12,15 +12,24 @@ public class ManageOrderTest  extends Base {
 	ManageOrderPage manageorder;
 	
 	@Test
-	public void verify_UpdationOfDeliveryBoy() {
+	public void verify_UpdatedDetailaOfDeliveryBoy() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		manageorder=new ManageOrderPage(driver);
-		manageorder.selectDeliveryBoy();
+		manageorder.selectDeliveryBoy("410");
 		manageorder.click_UpdateButton();
-		Assert.assertTrue(manageorder.alertMessage_IsDisplayed());
-		
-		
+		Assert.assertTrue(manageorder.alertMessage_IsDisplayed());		
+	}
+	
+	@Test
+	public void verify_OrderIdViewList() {
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		manageorder=new ManageOrderPage(driver);
+		manageorder.click_ManageOrder();
+		manageorder.viewListData("410");
+		manageorder.click_BackButton();
+		Assert.assertTrue(manageorder.listOrderText_IsDisplayed());
 	}
 	
 

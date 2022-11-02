@@ -6,14 +6,34 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.supermarket.base.Base;
 import com.supermarket.base.DataProviderClass;
+import com.supermarket.constants.Constants;
 import com.supermarket.pages.LoginPage;
 import com.supermarket.pages.PushNotificationPage;
+import com.supermarket.utilities.Excel;
 import com.supermarket.utilities.PdfReader;
 
 public class PushNotificationTest extends Base {
 	LoginPage loginpage;
 	PushNotificationPage pushnotificationpage;
 	PdfReader pdfreader;
+	Excel excel=new Excel();
+	
+	@Test
+	public void verify_PushNotificationFromExcel() {
+		String title;
+		String description;
+		excel.setExcelFile("Push Notification","PushNotificationInformations");
+		title=excel.getCellData(0, 0);
+		description=excel.getCellData(0, 1);
+		
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		pushnotificationpage=new PushNotificationPage(driver);
+		pushnotificationpage.click_PushNotificationButton();
+		pushnotificationpage.get_SuccessAlertMessage(title,description);
+		Assert.assertTrue(pushnotificationpage.is_AlertMessageDisplayed());
+		
+	}
 	
 	@Test
 	public void verify_PushNotification() {
@@ -29,8 +49,7 @@ public class PushNotificationTest extends Base {
 		Assert.assertTrue(pushnotificationpage.is_AlertMessageDisplayed());
 		pdfreader=new PdfReader();
 		map=pdfreader.readPdf_Data("pushnotificationdatas");
-		System.out.println(map.get("title 1"));
-			
+		System.out.println(map.get("title 1"));		
 	}
 	
 	@Test(dataProvider="pushnotification",dataProviderClass=DataProviderClass.class)
@@ -42,8 +61,7 @@ public class PushNotificationTest extends Base {
 		pushnotificationpage.enter_TitleField(data1);
 		pushnotificationpage.enter_DescriptionField(data2);
 		pushnotificationpage.click_OnSend();	
-		Assert.assertTrue(pushnotificationpage.is_SaveButtonEnabled());
-		
+		Assert.assertTrue(pushnotificationpage.is_SaveButtonEnabled());		
 	}
 	
 	@Test
@@ -52,12 +70,13 @@ public class PushNotificationTest extends Base {
 		loginpage.login();
 		pushnotificationpage=new PushNotificationPage(driver);
 		pushnotificationpage.click_PushNotificationButton();
-		String actualcolor=pushnotificationpage.get_color_SendButton();
+		String actualcolor=pushnotificationpage.get_Color_SendButton();
 		System.out.println(actualcolor);
-		String expectedcolor="rgba(255, 255, 255, 1)";
-		Assert.assertEquals(actualcolor, expectedcolor);
-	
+		String expectedcolor=Constants.EXPECTEDCOLOR;
+		Assert.assertEquals(actualcolor, expectedcolor);	
 	}
+	
+	
 	
 
 }

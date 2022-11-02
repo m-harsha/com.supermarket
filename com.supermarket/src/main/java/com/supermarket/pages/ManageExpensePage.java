@@ -1,7 +1,11 @@
 package com.supermarket.pages;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,9 +24,9 @@ public class ManageExpensePage {
 	@FindBy(xpath="//i[@class='nav-icon fas fa-money-bill-alt']")
 	private WebElement manageExpenseLink;
 	@FindBy(xpath="//a[@href='https://groceryapp.uniqassosiates.com/admin/list-expense']")
-	private WebElement ManageExpense;
+	private WebElement manageExpense;
 	@FindBy(xpath="//a[@class='btn btn-rounded btn-danger']")
-	private WebElement NewButton;
+	private WebElement newButton;
 	@FindBy(xpath="//select[@id='user_id']")
 	private WebElement user;
 	@FindBy(xpath="//select[@id='ex_cat']")
@@ -34,23 +38,19 @@ public class ManageExpensePage {
 	@FindBy(xpath="//select[@id='ex_type']")
 	private WebElement expensetype;
 	@FindBy(xpath="//input[@id='amount']")
-	private WebElement Amount;
+	private WebElement amountField;
 	@FindBy(xpath="//textarea[@id='content']")
-	private WebElement Remarks;
+	private WebElement remarksField;
 	@FindBy(xpath="//input[@type='file']")
 	private WebElement chooseFile;
 	@FindBy(xpath="//button[@type='submit']")
 	private WebElement saveButton;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement alertMessage;
-	@FindBy(xpath="(//tbody//tr[3]//td[9]//a)[1]")
-	private WebElement editExpenseData;
 	@FindBy(xpath="//button[@type='submit']")
 	private WebElement editUpdateButton;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement updatedAlertMessage;
-	@FindBy(xpath="(//tbody//tr[7]//td[9]//a)[2]")
-	private WebElement DeleteExpenseData;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement deleteAlert;
 	@FindBy(xpath="//a[@class='btn btn-rounded btn-primary']")
@@ -76,8 +76,6 @@ public class ManageExpensePage {
 	@FindBy(xpath="//span[@id='back']")
 	private WebElement backButtonExpenseReport;
 	
-	
-	
 	public ManageExpensePage(WebDriver driver) {
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
@@ -86,10 +84,10 @@ public class ManageExpensePage {
 		manageExpenseLink.click();
 	}
 	public void clickOnExpense() {
-		ManageExpense.click();
+		manageExpense.click();
 	}
 	public void clickOnNewButton() {
-		NewButton.click();
+		newButton.click();
 	}
 	public void clickOnUserType() {
 		user.click();
@@ -117,19 +115,19 @@ public class ManageExpensePage {
 		pageutility.select_ByIndex(4,expensetype);
 	}
 	public void enterAmount(String amount) {
-		Amount.sendKeys(amount);
+		amountField.sendKeys(amount);
 	}
 	public void enterRemarks(String remarks) {
-		Remarks.sendKeys(remarks);
+		remarksField.sendKeys(remarks);
 	}
 	public void clickOnChooseFile() {
 		pageutility=new PageUtility(driver);
 		pageutility.click_JavaScriptExecutor(chooseFile);	
 	}
-	public void FileUpload(String filepath) {
+	public void fileUpload(String filepath) {
 		chooseFile.sendKeys(filepath);
 	}
-	public void ClickOnSaveButton() {
+	public void clickOnSaveButton() {
 		pageutility=new PageUtility(driver);
     	pageutility.scrollAndClick(saveButton); 
 		
@@ -147,7 +145,7 @@ public class ManageExpensePage {
 		enterRemarks(remarks);
 	}
 	
-	public boolean AlertMessage_isDisplayed() {
+	public boolean alertMessage_isDisplayed() {
    	    generalutility=new GeneralUtility(driver);
    	    return generalutility.is_Displayed(alertMessage);
     }
@@ -155,12 +153,23 @@ public class ManageExpensePage {
    	    generalutility=new GeneralUtility(driver);
    	    return generalutility.get_Text(alertMessage);
    }
-   public boolean SaveButton_isDisplayed() {
+   public boolean saveButton_isDisplayed() {
 	   	 generalutility=new GeneralUtility(driver);
 	   	 return generalutility.is_Displayed(saveButton);
    }
-   public void edit_ExpenseData() {
-	   editExpenseData.click();
+   public void edit_ExpenseData(String usersName) {
+	   int j=0;
+		List<String> names=new ArrayList<String>();
+		generalutility=new GeneralUtility(driver);
+		names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+		for(j=0;j<names.size();j++) {
+			if(usersName.equals(names.get(j))) {
+				j++;
+				break;	 
+			 }
+		 }
+		WebElement editActionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[9]//a)[1]"));
+		editActionButton.click();
    }
    public void enter_OrderIdDataUpdation() {
 	   orderId.click();
@@ -185,11 +194,24 @@ public class ManageExpensePage {
  	    System.out.println(text);
  	    return text;
    }
-   public void delete_DataExpense() {
-	   DeleteExpenseData.click();
-	   driver.switchTo().alert().accept();
-	   //driver.switchTo().alert().dismiss();
-   }
+   public void delete_DataExpense(String usersName) {
+		int j=0;
+		List<String> names=new ArrayList<String>();
+		generalutility=new GeneralUtility(driver);
+		names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+		for(j=0;j<names.size();j++) {
+			if(usersName.equals(names.get(j))) {
+				j++;
+				break;	 
+			 }
+		 }
+		WebElement deleteactionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[9]//a)[2]"));
+		deleteactionButton.click();
+		driver.switchTo().alert().accept();
+		//driver.switchTo().alert().dismiss();	 
+	}
+		
+	   
    public boolean deleteAlertMessage_isDisplayed() {
   	 generalutility=new GeneralUtility(driver);
   	 return generalutility.is_Displayed(deleteAlert);

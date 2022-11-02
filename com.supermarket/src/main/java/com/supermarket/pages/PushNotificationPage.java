@@ -22,6 +22,7 @@ public class PushNotificationPage {
 	private WebElement sendButton;	
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement alertSuccessText;
+	
 		
 	public PushNotificationPage(WebDriver driver) {
 		this.driver=driver;
@@ -61,9 +62,10 @@ public class PushNotificationPage {
 		 generalutility=new GeneralUtility(driver);
     	 return generalutility.is_Displayed(sendButton);
 	 }
-	public String get_color_SendButton() {
+	public String get_Color_SendButton() {
 		 generalutility=new GeneralUtility(driver);
 		 return generalutility.get_CssValue(sendButton, "color");
 	 }
+	
 	
 }

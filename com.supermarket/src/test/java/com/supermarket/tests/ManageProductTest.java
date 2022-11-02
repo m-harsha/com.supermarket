@@ -18,7 +18,7 @@ public class ManageProductTest extends Base {
 		loginpage.login();	
 		manageproduct=new ManageProductPage(driver);
 		manageproduct.enterProductDetails("Milk","rty","20","5","30","25","10","25","fresh milk");
-		manageproduct.imageUpload(Constants.IMAGE_UPLOAD);
+		manageproduct.imageUpload(Constants.IMAGE_UPLOAD +"\\image1.jpeg");
 		manageproduct.clickOnSaveButton();
 		Assert.assertTrue(manageproduct.alertMessage_IsDisplayed());
 		

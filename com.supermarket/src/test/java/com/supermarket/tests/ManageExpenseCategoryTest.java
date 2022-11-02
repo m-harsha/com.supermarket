@@ -43,7 +43,7 @@ public class ManageExpenseCategoryTest extends Base {
 		category=new ManageExpenseCategoryPage(driver);
 		category.clickOnManageExpense();
 		category.clickOnExpenseCategory();
-		category.enterUpdatedTitle("Nuts");
+		category.enterUpdatedTitle("Grocery","Nuts");
 		category.updateButton();
 		Assert.assertTrue(category.updatedAlertMessage_IsDisplayed());
 	}
@@ -54,7 +54,7 @@ public class ManageExpenseCategoryTest extends Base {
 		category=new ManageExpenseCategoryPage(driver);
 		category.clickOnManageExpense();
 		category.clickOnExpenseCategory();
-		category.delete_DataExpense();
+		category.delete_ManageExpenseCategory("Biscuits");
 		Assert.assertTrue(category.deleteAlertMessage_isDisplayed());
 	
 	}
@@ -78,10 +78,7 @@ public class ManageExpenseCategoryTest extends Base {
 		category.clickOnManageExpense();
 		category.clickOnExpenseCategory();
 		category.expenseCategoryDetails(data1);
-		Assert.assertTrue(category.alertMessage_IsDisplayed());
-		
-		
-		
+		Assert.assertTrue(category.alertMessage_IsDisplayed());		
 	}
 	
 }

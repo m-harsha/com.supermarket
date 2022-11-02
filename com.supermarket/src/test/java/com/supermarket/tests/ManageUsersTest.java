@@ -36,12 +36,14 @@ public class ManageUsersTest extends Base {
 	}
 	
 	@Test
-	public void verify_DeleteManageUserAction() {
+	public void verify_DeleteManageUserData() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		manageuser=new ManageUsersPage(driver);
 		manageuser.clickOnManageUsers();
 		manageuser.delete_ManageUser("Riyanka M");
+		Assert.assertTrue(manageuser.is_DeleteAlertMessageDisplayed());
+		
 		
 	}
 	

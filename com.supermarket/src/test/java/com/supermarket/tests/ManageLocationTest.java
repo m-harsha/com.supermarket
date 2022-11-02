@@ -31,17 +31,6 @@ public class ManageLocationTest extends Base {
 	}
 	
 	@Test
-	public void verify_LocationInformationTextAlertMessage() {
-		loginpage=new LoginPage(driver);
-		loginpage.login();	
-		managelocation=new ManageLocationPage(driver);
-		managelocation.ManageLocationDetails("kerala","75");
-		String expectedresult=Constants.EXPECTED_ALERTTEXT;
-		String actualresult=managelocation.get_AlertMessageNotification();
-		System.out.println(actualresult);
-		Assert.assertEquals(actualresult, expectedresult,"This testcase failed");
-	}
-	@Test
 	public void verify_LocationStatusDeactivation() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
@@ -50,9 +39,10 @@ public class ManageLocationTest extends Base {
 		managelocation.deactivate_UserStatus("lkj");
 		System.out.println(managelocation.get_StatusAlertMessageNotification());
 		Assert.assertTrue(managelocation.statusAlertMessage_isDisplayed());		
-    }	
+    }
+	
 	@Test
-	public void verify_DeleteLocationAction() {
+	public void verify_DeleteLocationData() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		managelocation=new ManageLocationPage(driver);
@@ -60,16 +50,18 @@ public class ManageLocationTest extends Base {
 		managelocation.delete_Location("kerala");
 		Assert.assertTrue(managelocation.deleteAlertMessage_isDisplayed());
     }
+	
 	@Test
 	public void verify_UpdateDetailsOfManageLocation() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		managelocation=new ManageLocationPage(driver);
 		managelocation.clickOnManageLocation();	
-		managelocation.enter_StateDataUpdation();	
+		managelocation.enter_StateDataUpdation("Street7");	
 		managelocation.updateButton();
 		Assert.assertTrue(managelocation.updatedAlertMessage_IsDisplayed());
 	}
+	
 	@Test
 	public void verify_SearchedDataOfManageLocation() {
 		loginpage=new LoginPage(driver);
@@ -81,6 +73,18 @@ public class ManageLocationTest extends Base {
 		managelocation.entersearchedLocation("tvm");
 		managelocation.click_SearchButtonManageLocation();
 		Assert.assertFalse(managelocation.searchButtonManageLocationIsSelected());	
+	}
+	
+	@Test
+	public void verify_LocationInformationTextAlertMessage() {
+		loginpage=new LoginPage(driver);
+		loginpage.login();	
+		managelocation=new ManageLocationPage(driver);
+		managelocation.ManageLocationDetails("kerala","75");
+		String expectedresult=Constants.EXPECTED_ALERTTEXT;
+		String actualresult=managelocation.get_AlertMessageNotification();
+		System.out.println(actualresult);
+		Assert.assertEquals(actualresult, expectedresult,"This testcase failed");
 	}
 	
 }

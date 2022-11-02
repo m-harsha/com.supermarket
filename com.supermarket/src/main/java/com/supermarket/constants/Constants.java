@@ -8,7 +8,7 @@ public class Constants {
 	
 	/**ManageExpense page**/
 	
-	public static final String USERFILE_UPLOAD=System.getProperty("user.dir")+"\\src\\main\\resources\\FileUpload\\Grocery.pdf";
+	public static final String USERFILE_UPLOAD=System.getProperty("user.dir")+"\\src\\main\\resources\\FileUpload";
 	
 	/**Extent Report**/
 	
@@ -27,15 +27,22 @@ public class Constants {
    /**MangeDeliveryBoy page**/
 	
 	public static final String EXPECTED_ALERT_TEXT1="Alert!";
+	public static final String EXPECTEDBACKGROUNDCOLOR="rgba(220, 53, 69, 1)";
+	
+    /**PushNotification page**/
+	
+	public static final String EXPECTEDCOLOR="rgba(255, 255, 255, 1)";
 	
 	
    /**ManageLocation page**/
 	
 	public static final String EXPECTED_ALERTTEXT="Alert!";
 	
+	
    /**AdminUsers page**/
 	
 	public static final String EXPECTED_ALERTTEXT3="Alert!";
+	
 	
   /**ManageExpense page**/
 	

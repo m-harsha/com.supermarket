@@ -1,5 +1,9 @@
 package com.supermarket.pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,20 +21,16 @@ public class ManageOrderPage {
 	
 	@FindBy(xpath="//i[@class='nav-icon fas fa-shopping-basket']")
 	private WebElement manageOrderLink;
-	@FindBy(xpath="(//tbody//tr[1]//td[6]//a)[3]")
-	private WebElement assignDeliveryBoy;
 	@FindBy(xpath="(//select[@id='delivery_boy_id'])[1]")
 	private WebElement updateDeliveryBoy;
 	@FindBy(xpath="(//button[@name='assign_del'])[1]")
 	private WebElement updateButton;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement alertMessage;
-	@FindBy(xpath="(//tbody//tr[1]//td[6]//a)[1]")
-	private WebElement status;
-	@FindBy(xpath="(//select[@id='status'])[1]")
-	private WebElement updatestatus;
-	@FindBy(xpath="(//button[@name='Update_st'])[1]")
-	private WebElement updateStatusButton;
+	@FindBy(xpath="//i[@class='fas fa-arrow-left']")
+	private WebElement backButton;
+	@FindBy(xpath="//h1[@class='m-0 text-dark']")
+	private WebElement listOrderText;
 	
 	
 	public ManageOrderPage(WebDriver driver) {
@@ -40,12 +40,25 @@ public class ManageOrderPage {
 	public void click_ManageOrder() {
 		manageOrderLink.click();
 	}
-	public void assignDeliveryBoyData() {
-		assignDeliveryBoy.click();
-	}
-	public void selectDeliveryBoy() {
+	public void assignDeliveryBoyData(String usersName) {
+		int j=0;
+		 List<String> names=new ArrayList<String>();
+		 generalutility=new GeneralUtility(driver);
+		 pageutility=new PageUtility(driver);
+		 names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+		 for(j=0;j<names.size();j++) {
+			 if(usersName.equals(names.get(j))) {
+				 j++;
+				 break;	 
+			 }
+		 }
+		 WebElement deliveryBoyButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[6]//a)[3]"));
+		 deliveryBoyButton.click();
+	 }
+	
+	public void selectDeliveryBoy(String usersName) {
 		click_ManageOrder();
-		assignDeliveryBoyData();
+		assignDeliveryBoyData(usersName);
 		updateDeliveryBoy.click();
 		pageutility=new PageUtility(driver);
 		pageutility.select_ByIndex(4,updateDeliveryBoy);
@@ -60,6 +73,29 @@ public class ManageOrderPage {
     	generalutility=new GeneralUtility(driver);
     	return generalutility.is_Displayed(alertMessage);
    }
+	 public void viewListData(String usersName) {
+		int j=0;
+		List<String> names=new ArrayList<String>();
+		generalutility=new GeneralUtility(driver);
+		pageutility=new PageUtility(driver);
+		names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+		   for(j=0;j<names.size();j++) {
+				if(usersName.equals(names.get(j))) {
+					j++;
+					break;	 
+				 }
+			 }
+	   WebElement viewButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[7]//a)[1]"));
+	   viewButton.click();
+   }
+	 public void click_BackButton() {
+		backButton.click();
+   }
+	 public boolean listOrderText_IsDisplayed() {
+	    generalutility=new GeneralUtility(driver);
+	    return generalutility.is_Displayed(listOrderText);
+   }
+	 
 	
 
 }

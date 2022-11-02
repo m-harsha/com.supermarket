@@ -16,15 +16,6 @@ public class AdminUsersTest extends Base {
 	AdminUsersPage adminuserspage;
 	
 	@Test
-	public void verify_AdminUsersLogo() {
-		loginpage=new LoginPage(driver);
-		loginpage.login();
-		adminuserspage=new AdminUsersPage(driver);
-		adminuserspage.clickOnAdminUsers();
-		Assert.assertTrue(adminuserspage.logoSymbolOfAdminUsers_IsDisplayed());		
-	}
-	
-	@Test
 	public void verify_Add_NewAdminUsers() {
 		String userName;
 		String password;
@@ -38,6 +29,16 @@ public class AdminUsersTest extends Base {
 		adminuserspage.adminUsersDetails(userName,password);
 		System.out.println(adminuserspage.get_DangerAlertMessageNotification());
 		Assert.assertTrue(adminuserspage.alertMessage_isDisplayed());
+	}
+	
+	@Test
+	public void verify_AdminUserStatusDeactivation() {
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		adminuserspage=new AdminUsersPage(driver);
+		adminuserspage.clickOnAdminUsers();
+		adminuserspage.deactivate_UserAction("devi123");
+		Assert.assertTrue(adminuserspage.statusAlertMessage_isDisplayed());
 	}
 	
 	@Test

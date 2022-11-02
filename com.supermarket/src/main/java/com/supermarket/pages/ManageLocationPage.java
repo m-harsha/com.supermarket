@@ -28,7 +28,7 @@ public class ManageLocationPage {
 	@FindBy(xpath="//select[@id='st_id']")
 	private WebElement state;
 	@FindBy(xpath="//input[@id='location']")
-	private WebElement Location;
+	private WebElement locationField;
 	@FindBy(xpath="//input[@id='delivery']")
 	private WebElement deliveryCharge;
 	@FindBy(xpath="//button[@type='submit']")
@@ -39,8 +39,6 @@ public class ManageLocationPage {
 	private WebElement statusAlertMessage;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement deleteAlert;
-	@FindBy(xpath="(//tbody//tr[7]//td[6]//a)[1]")
-	private WebElement editExpenseData;
 	@FindBy(xpath="//button[@type='submit']")
 	private WebElement editUpdateButton;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
@@ -71,7 +69,7 @@ public class ManageLocationPage {
     	pageutility.select_ByIndex(2,state);
     }
 	public void enterTheLocation(String location) {
-    	Location.sendKeys(location);
+    	locationField.sendKeys(location);
     }
 	public void enterTheDeliveryCharge(String deliverycharge) {
     	deliveryCharge.sendKeys(deliverycharge);
@@ -132,8 +130,8 @@ public class ManageLocationPage {
 				 break;	 
 			 }
 		 }
-		 WebElement deactivateactionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[6]//a)[2]"));
-		 deactivateactionButton.click();
+		 WebElement deleteActionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[6]//a)[2]"));
+		 deleteActionButton.click();
 		 driver.switchTo().alert().accept();	
 		// driver.switchTo().alert().dismiss();	 
 	 }
@@ -141,11 +139,22 @@ public class ManageLocationPage {
     	 generalutility=new GeneralUtility(driver);
     	 return generalutility.is_Displayed(deleteAlert);
      }
-	 public void click_EditOption() {
-		 editExpenseData.click();
+	 public void click_EditOption(String usersName) {
+		 int j=0;
+		 List<String> names=new ArrayList<String>();
+		 generalutility=new GeneralUtility(driver);
+		 names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+		 for(j=0;j<names.size();j++) {
+			 if(usersName.equals(names.get(j))) {
+				 j++;
+				 break;	 
+			 }
+		 }
+		 WebElement editActionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[6]//a)[1]"));
+		 editActionButton.click();
 	 }
-	 public void enter_StateDataUpdation() {
-		 click_EditOption();
+	 public void enter_StateDataUpdation(String usersName) {
+		 click_EditOption(usersName);
 		 pageutility=new PageUtility(driver);
 		 pageutility.select_ByIndex(5,state);
 	 }
@@ -169,7 +178,7 @@ public class ManageLocationPage {
 		 pageutility.select_ByVisibleText("Argyll", state);	 
 	 }
 	 public void entersearchedLocation(String location) {
-	    	Location.sendKeys(location);
+	    	locationField.sendKeys(location);
 	 }
 	 public void click_SearchButtonManageLocation() {
 		 searchButtonOfManageLocation.click();	 

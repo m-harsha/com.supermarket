@@ -21,17 +21,17 @@ public class ManageDeliveryBoyPage {
 	@FindBy(xpath="//a[@class='btn btn-rounded btn-danger']")
 	private WebElement newButton;
 	@FindBy(xpath="//input[@id='name']")
-	private WebElement Name;
+	private WebElement nameField;
 	@FindBy(xpath="//input[@id='email']")
-	private WebElement Email;
+	private WebElement emailField;
 	@FindBy(xpath="//input[@id='phone']")
-	private WebElement PhoneNumber;
+	private WebElement phoneNumberField;
 	@FindBy(xpath="//textarea[@id='address']")
-	private WebElement Address;
+	private WebElement addressField;
 	@FindBy(xpath="//input[@id='username']")
-	private WebElement UserName;
+	private WebElement userName;
 	@FindBy(xpath="//input[@id='password']")
-	private WebElement PassWord;
+	private WebElement passWord;
 	@FindBy(xpath="//button[@class='btn btn-danger']")
 	private WebElement saveButton;
 	@FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']")
@@ -52,22 +52,22 @@ public class ManageDeliveryBoyPage {
     	newButton.click();
     } 
     public void enterName(String name) {
-    	Name.sendKeys(name);
+    	nameField.sendKeys(name);
     }
     public void enterEmail(String email) {
-    	Email.sendKeys(email);
+    	emailField.sendKeys(email);
     }
     public void enterPhoneNumber(String phone) {
-    	PhoneNumber.sendKeys(phone);
+    	phoneNumberField.sendKeys(phone);
     } 
     public void enterAddress(String address) {
-    	Address.sendKeys(address);
+    	addressField.sendKeys(address);
     }
     public void enterUserName(String username) {
-    	UserName.sendKeys(username);
+    	userName.sendKeys(username);
     }  
     public void enterPassword(String password) {
-    	PassWord.sendKeys(password);
+    	passWord.sendKeys(password);
     }
     public void click_SaveButton() {
     	pageutility=new PageUtility(driver);

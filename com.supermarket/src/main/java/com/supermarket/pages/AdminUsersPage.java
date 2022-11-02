@@ -1,5 +1,9 @@
 package com.supermarket.pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,8 +18,6 @@ public class AdminUsersPage {
 	PageUtility pageutility;
 	GeneralUtility generalutility;
 	
-	@FindBy(xpath="//i[@class='nav-icon fas fa-users']")		
-	private WebElement logoSymbol;
 	@FindBy(xpath="//i[@class='nav-icon fas fa-users']")
 	private WebElement adminUsersLink;
 	@FindBy(xpath="//a[@class='btn btn-rounded btn-danger']")
@@ -30,15 +32,13 @@ public class AdminUsersPage {
 	private WebElement saveButton;
 	@FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']")		
 	private WebElement alertMessage;
+	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")		
+	private WebElement statusAlertMessage;
+	
 	
 	public AdminUsersPage(WebDriver driver) {
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
-	}
-	
-	public boolean logoSymbolOfAdminUsers_IsDisplayed() {
-		generalutility=new GeneralUtility(driver);
-		return generalutility.is_Displayed(logoSymbol);		
 	}
 	public void clickOnAdminUsers() {
 		adminUsersLink.click();
@@ -75,5 +75,24 @@ public class AdminUsersPage {
  	    generalutility=new GeneralUtility(driver);
  	    return generalutility.is_Displayed(alertMessage);
     }
+	 public void deactivate_UserAction(String usersName) {
+		 int j=0;
+		 List<String> names=new ArrayList<String>();
+		 generalutility=new GeneralUtility(driver);
+		 names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+		 for(j=0;j<names.size();j++) {
+			 if(usersName.equals(names.get(j))) {
+				 j++;
+				 break;	 
+			 }
+		 }
+		 WebElement deactivateactionButton=driver.findElement(By.xpath("//tbody//tr["+j+"]//td[3]//a"));
+		 deactivateactionButton.click();
+		 
+	 }
+	 public boolean statusAlertMessage_isDisplayed() {
+	 	 generalutility=new GeneralUtility(driver);
+	 	 return generalutility.is_Displayed(statusAlertMessage);
+	 }
 
 }

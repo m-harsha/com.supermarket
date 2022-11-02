@@ -1,5 +1,9 @@
 package com.supermarket.pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,19 +21,15 @@ public class ManageExpenseCategoryPage {
 	@FindBy(xpath="//a[@class='btn btn-rounded btn-danger']")
 	private WebElement newButton;
 	@FindBy(xpath="//input[@id='name']")
-	private WebElement Title;
+	private WebElement titleField;
 	@FindBy(xpath="//button[@name='Create']")
 	private WebElement saveButton;
 	@FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']")
 	private WebElement alertMessage;
-	@FindBy(xpath="(//tbody//tr[6]//td[2]//a)[1]")
-	private WebElement editExpenseCategoryData;
 	@FindBy(xpath="//button[@name='Update']")
 	private WebElement editUpdateButton;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement updatedAlertMessage;
-	@FindBy(xpath="(//tbody//tr[7]//td[2]//a)[2]")
-	private WebElement DeleteExpenseData;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement deleteAlert;
 	@FindBy(xpath="//a[@class='btn btn-rounded btn-primary']")
@@ -54,7 +54,7 @@ public class ManageExpenseCategoryPage {
 		newButton.click();	
     }
 	public void enterTitle(String title) {
-		Title.sendKeys(title);
+		titleField.sendKeys(title);
 	}
 	public void clickOnSaveButton() {
 		saveButton.click();	
@@ -80,13 +80,24 @@ public class ManageExpenseCategoryPage {
 		 return generalutility.is_Selected(saveButton);
 	 }
 	
-	 public void click_EditOption() {
-		 editExpenseCategoryData.click();
+	 public void click_EditOption(String usersName) {
+		 int j=0;
+		 List<String> names=new ArrayList<String>();
+		 generalutility=new GeneralUtility(driver);
+		 names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+		 for(j=0;j<names.size();j++) {
+			 if(usersName.equals(names.get(j))) {
+				 j++;
+				 break;	 
+			 }
+		 }
+		 WebElement editActionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[2]//a)[1]"));
+		 editActionButton.click();
 	 }
-	 public void enterUpdatedTitle(String title1) {
-		 click_EditOption();
-		 Title.clear();
-		 Title.sendKeys(title1);
+	 public void enterUpdatedTitle(String usersName,String title1) {
+		 click_EditOption(usersName);
+		 titleField.clear();
+		 titleField.sendKeys(title1);
 	}
 	 public void updateButton() {
 		 editUpdateButton.click();
@@ -95,11 +106,23 @@ public class ManageExpenseCategoryPage {
 	  	 generalutility=new GeneralUtility(driver);
 	  	 return generalutility.is_Displayed(updatedAlertMessage);
 	 }
-	 public void delete_DataExpense() {
-		 DeleteExpenseData.click();
+	 public void delete_ManageExpenseCategory(String usersName) {
+		 int j=0;
+		 List<String> names=new ArrayList<String>();
+		 generalutility=new GeneralUtility(driver);
+		 names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+		 for(j=0;j<names.size();j++) {
+			 if(usersName.equals(names.get(j))) {
+				 j++;
+				 break;	 
+			 }
+		 }
+		 WebElement deactivateactionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[2]//a)[2]"));
+		 deactivateactionButton.click();
 		 driver.switchTo().alert().accept();
-		 //driver.switchTo().alert().dismiss();
+		//driver.switchTo().alert().dismiss();	 
 	 }
+	
 	 public boolean deleteAlertMessage_isDisplayed() {
 	     generalutility=new GeneralUtility(driver);
 	  	 return generalutility.is_Displayed(deleteAlert);

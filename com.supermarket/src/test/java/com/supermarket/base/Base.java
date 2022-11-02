@@ -11,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 import com.supermarket.constants.Constants;
 import com.supermarket.utilities.ScreenShot;
@@ -61,18 +62,25 @@ public class Base {
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(WaitUtility.PAGE_LOAD_WAIT));
 		
 	}
-	
-	@BeforeMethod
-	public void setUp() {
+	@Parameters("browser")
+	@BeforeMethod(enabled=false)
+	public void setUpCrossBrowser(String browser) {
 		
+		//String browser;
+		String url;
+		//browser=prop.getProperty("browser");
+		url=prop.getProperty("url");
+		initialize(browser,url);		
+	}
+	@BeforeMethod(enabled=true,alwaysRun=true)
+	public void setUp() {
 		String browser;
 		String url;
 		browser=prop.getProperty("browser");
 		url=prop.getProperty("url");
 		initialize(browser,url);
-		
 	}
-	@AfterMethod
+	@AfterMethod(alwaysRun=true)
 	public void tearDown(ITestResult itestresult) {
 		screenshot=new ScreenShot();
 		if(itestresult.getStatus()==ITestResult.FAILURE) {
@@ -82,4 +90,5 @@ public class Base {
 	}
 		//driver.close();
 }
+	
 }

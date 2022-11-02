@@ -21,6 +21,8 @@ public class ManageUsersPage {
 	private WebElement manageusersLink;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement deactivateAlert;
+	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
+	private WebElement deleteAlert;
 	
 	
 	public ManageUsersPage(WebDriver driver) {
@@ -85,5 +87,8 @@ public class ManageUsersPage {
 	    	generalutility=new GeneralUtility(driver);
 	    	return generalutility.get_Text(deactivateAlert);
 	    }
-	 
+	 public boolean is_DeleteAlertMessageDisplayed() {
+		 generalutility=new GeneralUtility(driver);
+    	 return generalutility.is_Displayed(deleteAlert);
+	 }
 }

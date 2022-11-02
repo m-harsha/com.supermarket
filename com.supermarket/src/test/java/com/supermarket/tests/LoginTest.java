@@ -10,7 +10,7 @@ import com.supermarket.pages.LoginPage;
 public class LoginTest extends Base {
 	LoginPage loginpage;
 	
-	@Test
+	@Test(groups="smoke")
 	public void verify_Login() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
@@ -28,11 +28,20 @@ public class LoginTest extends Base {
 		Assert.assertEquals(actualresult, expectedresult,"This testcase failed");		
 	}
 	
-	@Test
+	@Test(groups="sanity")
 	public void verify_RememeberMeCheckBox() {
 		loginpage=new LoginPage(driver);
 		loginpage.click_OnRememberMeCheckBox();
 		Assert.assertTrue(loginpage.is_RememeberMeSelected());
+	}
+	
+	@Test
+	public void verify_Logout() {
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		loginpage.clickOnLogOut();
+		Assert.assertTrue(loginpage.is_SignInButtonDisplayed());
+		
 	}
 	
 }

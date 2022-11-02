@@ -28,6 +28,9 @@ public class LoginPage {
 	private WebElement rememeberMe;
 	@FindBy(xpath="//label[@for='remember']")		
 	private WebElement rememeberMeLabel;
+	@FindBy(xpath="//i[@class='ace-icon fa fa-power-off']")		
+	private WebElement logout;
+	
 		
 	public LoginPage(WebDriver driver) {
 		this.driver=driver;
@@ -73,6 +76,18 @@ public class LoginPage {
     	generalutility=new GeneralUtility(driver);
     	return generalutility.is_Selected(rememeberMe);
     }
+    public void clickOnProfileImage() {
+    	profileImage.click();
+    }
+    public void clickOnLogOut() {
+    	clickOnProfileImage();
+    	logout.click();
+    }
+    public boolean is_SignInButtonDisplayed() {
+	    generalutility=new GeneralUtility(driver);
+	    return generalutility.is_Displayed(signIn);		
+	}
+   
    
 
 

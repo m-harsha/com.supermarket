@@ -25,10 +25,10 @@ public class ManageExpenseTest extends Base {
 		loginpage.login();	
 		manageexpensepage=new ManageExpensePage(driver);
 		manageexpensepage.enter_PageInformations(amount, remarks);
-		manageexpensepage.FileUpload(Constants.USERFILE_UPLOAD);
-		manageexpensepage.ClickOnSaveButton();
+		manageexpensepage.fileUpload(Constants.USERFILE_UPLOAD +"\\Grocery.pdf");
+		manageexpensepage.clickOnSaveButton();
 		System.out.println(manageexpensepage.get_AlertMessageNotification());
-		Assert.assertTrue(manageexpensepage.AlertMessage_isDisplayed());		
+		Assert.assertTrue(manageexpensepage.alertMessage_isDisplayed());		
 	}
 	@Test
 	public void verify_ManageExpenseFunctionalities() {
@@ -36,9 +36,9 @@ public class ManageExpenseTest extends Base {
 		loginpage.login();	
 		manageexpensepage=new ManageExpensePage(driver);
 		manageexpensepage.enter_PageInformations("2000", "Amount is paid");
-		manageexpensepage.FileUpload(Constants.USERFILE_UPLOAD);
-		manageexpensepage.ClickOnSaveButton();
-		Assert.assertTrue(manageexpensepage.SaveButton_isDisplayed());
+		manageexpensepage.fileUpload(Constants.USERFILE_UPLOAD +"\\Grocery.pdf");
+		manageexpensepage.clickOnSaveButton();
+		Assert.assertTrue(manageexpensepage.saveButton_isDisplayed());
 	}
 	@Test
 	public void verify_UpdateDetailsOfManageExpense() {
@@ -47,14 +47,11 @@ public class ManageExpenseTest extends Base {
 		manageexpensepage=new ManageExpensePage(driver);
 		manageexpensepage.clickOnManageExpense();
 		manageexpensepage.clickOnExpense();
-		manageexpensepage.edit_ExpenseData();
+		manageexpensepage.edit_ExpenseData("Icecream_21_09_2022_01_20 (232-ST)");
 		manageexpensepage.enter_OrderIdDataUpdation();
 		manageexpensepage.updateButton();
 		Assert.assertTrue(manageexpensepage.updatedAlertMessage_IsDisplayed());
-		//String expectedresult=Constants.EXPECTED_ALERTTEXT4;
-		//String actualresult=manageexpensepage.get_UpdatedAlertMessage();
-		//Assert.assertEquals(actualresult,expectedresult);
-		
+	
 	}
 	@Test
 	public void verify_DeleteManageExpenseData() {
@@ -63,7 +60,7 @@ public class ManageExpenseTest extends Base {
 		manageexpensepage=new ManageExpensePage(driver);
 		manageexpensepage.clickOnManageExpense();
 		manageexpensepage.clickOnExpense();
-		manageexpensepage.delete_DataExpense();
+		manageexpensepage.delete_DataExpense("IceCreams (Admin2-AD)");
 		Assert.assertTrue(manageexpensepage.deleteAlertMessage_isDisplayed());
 	}
 	@Test

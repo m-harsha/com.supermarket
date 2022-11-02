@@ -40,19 +40,7 @@ public class ManageDeliveryBoyTest extends Base {
 		Assert.assertTrue(deliveryboypage.alertMessage_isDisplayed());
 	}
 	
-	@Test
-	public void verify_DeliveryBoyTextAlertMessage() {
-		loginpage=new LoginPage(driver);
-		loginpage.login();	
-		deliveryboypage=new ManageDeliveryBoyPage(driver);
-		deliveryboypage.create_DeliveryBoy("Ami","ami@gmail.com","897565634","erty2y","ana","wet87");
-		String expectedresult=Constants.EXPECTED_ALERT_TEXT1;
-		String actualresult=deliveryboypage.get_DangerAlertMessageNotification();
-		System.out.println(actualresult);
-		Assert.assertEquals(actualresult, expectedresult,"This testcase failed");
-     }
-	
-	@Test
+	@Test(groups= {"smoke","sanity"})
 	public void verify_DeliveryBoyStatusDeactivation() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
@@ -81,7 +69,7 @@ public class ManageDeliveryBoyTest extends Base {
 		deliveryboypage.clickOnDeliveryBoy();
 		String actualbackgroundcolor=deliveryboypage.get_Backgroundcolor_NewButton();
 		System.out.println(actualbackgroundcolor);
-		String expectedbackgroundcolor="rgba(220, 53, 69, 1)";
+		String expectedbackgroundcolor=Constants.EXPECTEDBACKGROUNDCOLOR;
 		Assert.assertEquals(actualbackgroundcolor, expectedbackgroundcolor);
 	}
 	
@@ -99,9 +87,20 @@ public class ManageDeliveryBoyTest extends Base {
 		deliveryboypage.enterUserName(data5);
 		deliveryboypage.enterPassword(data6);
 		deliveryboypage.click_SaveButton();	
-		Assert.assertTrue(deliveryboypage.is_SaveButtonDisplayed());
-		
+		Assert.assertTrue(deliveryboypage.is_SaveButtonDisplayed());		
     }
+	
+	@Test
+	public void verify_DeliveryBoyTextAlertMessage() {
+		loginpage=new LoginPage(driver);
+		loginpage.login();	
+		deliveryboypage=new ManageDeliveryBoyPage(driver);
+		deliveryboypage.create_DeliveryBoy("Ami","ami@gmail.com","897565634","erty2y","ana","wet87");
+		String expectedresult=Constants.EXPECTED_ALERT_TEXT1;
+		String actualresult=deliveryboypage.get_DangerAlertMessageNotification();
+		System.out.println(actualresult);
+		Assert.assertEquals(actualresult, expectedresult,"This testcase failed");
+     }
 	
 	
 }
