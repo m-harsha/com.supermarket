@@ -24,7 +24,6 @@ public class LoginTest extends Base {
 		loginpage.get_AlertMessageNotification();
 		String expectedresult=Constants.EXPECTED_ALERT_TEXT;
 		String actualresult=loginpage.get_AlertMessageNotification();
-		System.out.println(actualresult);
 		Assert.assertEquals(actualresult, expectedresult,"This testcase failed");		
 	}
 	
@@ -36,11 +35,13 @@ public class LoginTest extends Base {
 	}
 	
 	@Test
-	public void verify_Logout() {
+	public void verify_LogoutFunctionality() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		loginpage.clickOnLogOut();
-		Assert.assertTrue(loginpage.is_SignInButtonDisplayed());
+		String actualtext=loginpage.getTextOfSignIn();
+		String expectedtext=Constants.EXPECTED_SIGNINTEXT;
+		Assert.assertEquals(actualtext, expectedtext);
 		
 	}
 	

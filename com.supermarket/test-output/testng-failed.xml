@@ -1,53 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="2" guice-stage="DEVELOPMENT" name="Failed suite [parallelrun]" parallel="tests">
-  <listeners>
-    <listener class-name="com.supermarket.listners.ExtentReporter"/>
-  </listeners>
-  <test name="smoke(failed)" parallel="tests">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
     <classes>
-      <class name="com.supermarket.tests.LoginTest">
+      <class name="com.supermarket.tests.ManageOrderTest">
         <methods>
           <include name="setUp"/>
           <include name="setUpCrossBrowser"/>
           <include name="tearDown"/>
-          <include name="verify_InvalidLogin_AlertMessage"/>
+          <include name="verify_UpdatedDetailsOfDeliveryBoy"/>
         </methods>
-      </class> <!-- com.supermarket.tests.LoginTest -->
-      <class name="com.supermarket.tests.PushNotificationTest">
-        <methods>
-          <include name="setUp"/>
-          <include name="verify_PushNotification"/>
-          <include name="setUpCrossBrowser"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- com.supermarket.tests.PushNotificationTest -->
+      </class> <!-- com.supermarket.tests.ManageOrderTest -->
     </classes>
-  </test> <!-- smoke(failed) -->
-  <test name="regression(failed)" parallel="tests">
-    <classes>
-      <class name="com.supermarket.tests.ManageExpenseTest">
-        <methods>
-          <include name="setUp"/>
-          <include name="verify_EnterNewExpenseInformations"/>
-          <include name="setUpCrossBrowser"/>
-          <include name="tearDown"/>
-          <include name="verify_DeleteManageExpenseData"/>
-          <include name="verify_SearchedDataOfManageExpense"/>
-          <include name="verify_UpdateDetailsOfManageExpense"/>
-          <include name="verify_ManageExpenseFunctionalities"/>
-        </methods>
-      </class> <!-- com.supermarket.tests.ManageExpenseTest -->
-      <class name="com.supermarket.tests.ManageDeliveryBoyTest">
-        <methods>
-          <include name="setUp"/>
-          <include name="setUpCrossBrowser"/>
-          <include name="tearDown"/>
-          <include name="verify_DeliveryBoyTextAlertMessage"/>
-          <include name="verify_DeliveryBoyStatusDeactivation"/>
-          <include name="verify_DeleteDeliveryBoyAction"/>
-        </methods>
-      </class> <!-- com.supermarket.tests.ManageDeliveryBoyTest -->
-    </classes>
-  </test> <!-- regression(failed) -->
-</suite> <!-- Failed suite [parallelrun] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

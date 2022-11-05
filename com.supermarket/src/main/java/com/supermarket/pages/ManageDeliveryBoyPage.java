@@ -73,10 +73,7 @@ public class ManageDeliveryBoyPage {
     	pageutility=new PageUtility(driver);
     	pageutility.scrollAndClick(saveButton); 	
     }   
-    public boolean is_SaveButtonDisplayed() {
-		 generalutility=new GeneralUtility(driver);
-   	     return generalutility.is_Displayed(saveButton);
-	 }
+   
     public void create_DeliveryBoy(String name,String email,String phone,String address,String UserName, String password) {
     	clickOnDeliveryBoy();
     	clickOnNewButton();
@@ -88,11 +85,11 @@ public class ManageDeliveryBoyPage {
 		enterPassword(password);
 		click_SaveButton();
 	}  
-     public boolean alertMessage_isDisplayed() {
-    	 generalutility=new GeneralUtility(driver);
-    	 return generalutility.is_Displayed(alertMessage);
-     }
-    public String get_DangerAlertMessageNotification() {
+     public String visibilityOfAlertNotification() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_Attribute(alertMessage, "class");
+	 }
+    public String get_AlertMessageNotification() {
     	generalutility=new GeneralUtility(driver);
     	return generalutility.get_Text(alertMessage);
     }
@@ -126,24 +123,24 @@ public class ManageDeliveryBoyPage {
 		 WebElement deactivateactionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[8]//a)[2]"));
 		 deactivateactionButton.click();
 		 driver.switchTo().alert().accept();	
-		 //driver.switchTo().alert().dismiss();	 
 	 }
-	 public String get_Backgroundcolor_NewButton() {
+	 public String visibilityOfDeleteAlertNotification() {
 		 generalutility=new GeneralUtility(driver);
-		 return generalutility.get_CssValue(newButton, "background-color");
+		 return generalutility.get_Attribute(deleteAlert, "class");
 	 }
-	 public boolean is_DeactivateActionAlertMessageDisplayed() {
+	 public String visibilityOfDeactivateAlertNotification() {
 		 generalutility=new GeneralUtility(driver);
-    	 return generalutility.is_Displayed(deactivateAlert);
+		 return generalutility.get_Attribute(deactivateAlert, "class");
 	 }
-	 public String get_AlertMessageNotification() {
-	    generalutility=new GeneralUtility(driver);
-	    return generalutility.get_Text(deactivateAlert);
+		
+	 public String get_ColorOfSaveButton() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_CssValue(saveButton, "color");
 	 }
-	 public boolean deleteAlertMessage_isDisplayed() {
-    	 generalutility=new GeneralUtility(driver);
-    	 return generalutility.is_Displayed(deleteAlert);
-     }
+		
+	 
+	
+	
 }
 
 

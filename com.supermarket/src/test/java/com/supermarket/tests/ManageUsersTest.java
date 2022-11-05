@@ -18,7 +18,6 @@ public class ManageUsersTest extends Base {
 		manageuser=new ManageUsersPage(driver);
 		manageuser.clickOnManageUsers();
 		manageuser.deactivate_UserStatus("Subina S");
-		System.out.println(manageuser.get_AlertMessageNotification());
 		Assert.assertTrue(manageuser.is_DeactivateActionAlertMessageDisplayed());
 		
     }
@@ -30,7 +29,6 @@ public class ManageUsersTest extends Base {
 		manageuser=new ManageUsersPage(driver);
 		manageuser.clickOnManageUsers();
 		manageuser.deactivate_UserAction("rex lex");
-		System.out.println(manageuser.get_AlertMessageNotification());
 		Assert.assertTrue(manageuser.is_DeactivateActionAlertMessageDisplayed());
 		
 	}

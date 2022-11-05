@@ -20,40 +20,39 @@ public class PushNotificationTest extends Base {
 	
 	@Test
 	public void verify_PushNotificationFromExcel() {
-		String title;
-		String description;
 		excel.setExcelFile("Push Notification","PushNotificationInformations");
-		title=excel.getCellData(0, 0);
-		description=excel.getCellData(0, 1);
-		
+		String title=excel.getCellData(0, 0);
+		String description=excel.getCellData(0, 1);
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		pushnotificationpage=new PushNotificationPage(driver);
 		pushnotificationpage.click_PushNotificationButton();
 		pushnotificationpage.get_SuccessAlertMessage(title,description);
-		Assert.assertTrue(pushnotificationpage.is_AlertMessageDisplayed());
-		
+		String actualresult=pushnotificationpage.visibilityOfAlertNotification();
+		String expectedresult=Constants.EXPECTEDALERT;
+		Assert.assertEquals(actualresult,expectedresult);
 	}
+		
 	
 	@Test
-	public void verify_PushNotification() {
-		
-		HashMap<String, String> map=new HashMap<String,String>();
-		
+	public void verify_PushNotification() {	
+		HashMap<String, String> map=new HashMap<String,String>();	
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		pushnotificationpage=new PushNotificationPage(driver);
 		pushnotificationpage.click_PushNotificationButton();
-		String actualtext=pushnotificationpage.get_SuccessAlertMessage("ab", "rt");
-		System.out.println(actualtext);
-		Assert.assertTrue(pushnotificationpage.is_AlertMessageDisplayed());
+		pushnotificationpage.get_SuccessAlertMessage("ab", "rt");
+		pushnotificationpage.is_AlertMessageDisplayed();
+		String actualcolor=pushnotificationpage.get_ColorOfAlert();
+		String expectedcolor=Constants.EXPECTEDALERTCOLOR;
+		Assert.assertEquals(actualcolor, expectedcolor);
 		pdfreader=new PdfReader();
 		map=pdfreader.readPdf_Data("pushnotificationdatas");
-		System.out.println(map.get("title 1"));		
+			
 	}
 	
 	@Test(dataProvider="pushnotification",dataProviderClass=DataProviderClass.class)
-	public void create_PushNotificationDataByDataproviderclass(String data1,String data2) {
+	public void verify_PushNotificationDataByDataproviderclass(String data1,String data2) {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		pushnotificationpage=new PushNotificationPage(driver);
@@ -61,20 +60,14 @@ public class PushNotificationTest extends Base {
 		pushnotificationpage.enter_TitleField(data1);
 		pushnotificationpage.enter_DescriptionField(data2);
 		pushnotificationpage.click_OnSend();	
-		Assert.assertTrue(pushnotificationpage.is_SaveButtonEnabled());		
+		String actualcolor=pushnotificationpage.get_ColorOfSendButton();
+		String expectedcolor=Constants.EXPECTEDCOLOR;
+		Assert.assertEquals(actualcolor, expectedcolor);
+		
+			
 	}
 	
-	@Test
-	public void verify_ColorOfSendButton() {
-		loginpage=new LoginPage(driver);
-		loginpage.login();
-		pushnotificationpage=new PushNotificationPage(driver);
-		pushnotificationpage.click_PushNotificationButton();
-		String actualcolor=pushnotificationpage.get_Color_SendButton();
-		System.out.println(actualcolor);
-		String expectedcolor=Constants.EXPECTEDCOLOR;
-		Assert.assertEquals(actualcolor, expectedcolor);	
-	}
+	
 	
 	
 	

@@ -35,6 +35,8 @@ public class ManageLocationPage {
 	private WebElement saveButton;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")		
 	private WebElement alertMessage;
+	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
+	private WebElement deactivateAlert;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")		
 	private WebElement statusAlertMessage;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
@@ -89,9 +91,21 @@ public class ManageLocationPage {
 	}
 	
 	 public String get_AlertMessageNotification() {
-	    	generalutility=new GeneralUtility(driver);
-	    	return generalutility.get_Text(alertMessage);
-	    }
+	    generalutility=new GeneralUtility(driver);
+	    return generalutility.get_Text(alertMessage);
+	 }
+	 public String visibilityOfAlertNotification() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_Attribute(alertMessage, "class");
+	 }
+	 public String get_ColorSuccessAlert() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_CssValue(alertMessage, "color");
+	 }
+	 public String get_BackgroundcolorDeactivateAlert() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_CssValue(deactivateAlert, "background-color");
+	 }
 	 public boolean alertMessage_isDisplayed() {
     	 generalutility=new GeneralUtility(driver);
     	 return generalutility.is_Displayed(alertMessage);
@@ -133,12 +147,16 @@ public class ManageLocationPage {
 		 WebElement deleteActionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[6]//a)[2]"));
 		 deleteActionButton.click();
 		 driver.switchTo().alert().accept();	
-		// driver.switchTo().alert().dismiss();	 
+		//driver.switchTo().alert().dismiss();	 
 	 }
 	 public boolean deleteAlertMessage_isDisplayed() {
     	 generalutility=new GeneralUtility(driver);
     	 return generalutility.is_Displayed(deleteAlert);
      }
+	 public String get_FontStyleOfDeleteButton() {
+		   generalutility=new GeneralUtility(driver);
+		   return generalutility.get_CssValue(editUpdateButton, "font-style");
+		 }
 	 public void click_EditOption(String usersName) {
 		 int j=0;
 		 List<String> names=new ArrayList<String>();
@@ -167,6 +185,10 @@ public class ManageLocationPage {
 	  	 generalutility=new GeneralUtility(driver);
 	  	 return generalutility.is_Displayed(updatedAlertMessage);
 	  }
+	 public String get_ColorOfUpdateButton() {
+		  generalutility=new GeneralUtility(driver);
+		  return generalutility.get_CssValue(editUpdateButton, "color");
+	  }
 	 public void clickSearchButton() {
 		 searchButton.click();	   
 	   }
@@ -183,9 +205,9 @@ public class ManageLocationPage {
 	 public void click_SearchButtonManageLocation() {
 		 searchButtonOfManageLocation.click();	 
 	 }
-	 public boolean searchButtonManageLocationIsSelected() {
+	 public String get_BackgroundcolorOfSearchButton() {
 		 generalutility=new GeneralUtility(driver);
-		 return generalutility.is_Selected(searchButtonOfManageLocation);
+		 return generalutility.get_CssValue(searchButtonOfManageLocation,"color");
 	 }
 		  
 }

@@ -46,5 +46,8 @@ public class GeneralUtility {
 	public String get_CssValue(WebElement element,String value) {
 		return element.getCssValue(value);
 	}
+	public String get_Attribute(WebElement element,String value) {
+	    return element.getAttribute(value);
 
+}
 }

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="3" total="4" passed="1">
+<testng-results skipped="0" failed="0" ignored="1" total="2" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="58735" started-at="2022-11-02T05:18:18Z" finished-at="2022-11-02T05:19:17Z">
+  <suite name="Default suite" duration-ms="43253" started-at="2022-11-04T14:28:16Z" finished-at="2022-11-04T14:28:59Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="58735" started-at="2022-11-02T05:18:18Z" finished-at="2022-11-02T05:19:17Z">
-      <class name="com.supermarket.tests.LoginTest">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.supermarket.tests.LoginTest@9660f4e]" name="setUp" is-config="true" duration-ms="34878" started-at="2022-11-02T10:48:18Z" finished-at="2022-11-02T10:48:53Z">
+    <test name="Default test" duration-ms="43253" started-at="2022-11-04T14:28:16Z" finished-at="2022-11-04T14:28:59Z">
+      <class name="com.supermarket.tests.ManageOrderTest">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.supermarket.tests.ManageOrderTest@9660f4e]" name="setUp" is-config="true" duration-ms="27034" started-at="2022-11-04T19:58:16Z" finished-at="2022-11-04T19:58:43Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="verify_Logout()[pri:0, instance:com.supermarket.tests.LoginTest@9660f4e]" name="verify_Logout" duration-ms="23701" started-at="2022-11-02T10:48:53Z" finished-at="2022-11-02T10:49:17Z">
+        <test-method status="PASS" signature="verify_UpdatedDetailsOfDeliveryBoy()[pri:0, instance:com.supermarket.tests.ManageOrderTest@9660f4e]" name="verify_UpdatedDetailsOfDeliveryBoy" duration-ms="16152" started-at="2022-11-04T19:58:43Z" finished-at="2022-11-04T19:58:59Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verify_Logout -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.supermarket.tests.LoginTest@9660f4e]" name="tearDown" is-config="true" duration-ms="125" started-at="2022-11-02T10:49:17Z" finished-at="2022-11-02T10:49:17Z">
+        </test-method> <!-- verify_UpdatedDetailsOfDeliveryBoy -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.supermarket.tests.ManageOrderTest@9660f4e]" name="tearDown" is-config="true" duration-ms="28" started-at="2022-11-04T19:58:59Z" finished-at="2022-11-04T19:58:59Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verify_Logout status=SUCCESS method=LoginTest.verify_Logout()[pri:0, instance:com.supermarket.tests.LoginTest@9660f4e] output={null}]]]>
+                <![CDATA[[TestResult name=verify_UpdatedDetailsOfDeliveryBoy status=SUCCESS method=ManageOrderTest.verify_UpdatedDetailsOfDeliveryBoy()[pri:0, instance:com.supermarket.tests.ManageOrderTest@9660f4e] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- com.supermarket.tests.LoginTest -->
+      </class> <!-- com.supermarket.tests.ManageOrderTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

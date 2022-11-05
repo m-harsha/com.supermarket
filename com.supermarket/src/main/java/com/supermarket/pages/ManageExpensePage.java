@@ -75,6 +75,8 @@ public class ManageExpensePage {
 	private WebElement nextWindowExpenseReport;
 	@FindBy(xpath="//span[@id='back']")
 	private WebElement backButtonExpenseReport;
+	@FindBy(xpath="//h1[text()='List Expense']")
+	private WebElement listExpenseText;
 	
 	public ManageExpensePage(WebDriver driver) {
 		this.driver=driver;
@@ -145,18 +147,20 @@ public class ManageExpensePage {
 		enterRemarks(remarks);
 	}
 	
-	public boolean alertMessage_isDisplayed() {
-   	    generalutility=new GeneralUtility(driver);
-   	    return generalutility.is_Displayed(alertMessage);
-    }
+	 public String visibilityOfAlertNotification() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_Attribute(alertMessage, "class");
+	 }
+	
    public String get_AlertMessageNotification() {
    	    generalutility=new GeneralUtility(driver);
    	    return generalutility.get_Text(alertMessage);
-   }
-   public boolean saveButton_isDisplayed() {
-	   	 generalutility=new GeneralUtility(driver);
-	   	 return generalutility.is_Displayed(saveButton);
-   }
+    }
+   public String get_ColorOfSaveButton() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_CssValue(saveButton, "color");
+	 }
+  
    public void edit_ExpenseData(String usersName) {
 	   int j=0;
 		List<String> names=new ArrayList<String>();
@@ -182,10 +186,12 @@ public class ManageExpensePage {
 	   waitutility.element_ToBeClickable(10L, "//button[@type='submit']");
 	   pageutility.scrollAndClick(editUpdateButton); 	   
    }
-   public boolean updatedAlertMessage_IsDisplayed() {
-  	    generalutility=new GeneralUtility(driver);
-  	    return generalutility.is_Displayed(updatedAlertMessage);
-  }
+  
+   public String visibilityOfUpdatedAlertNotification() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_Attribute(updatedAlertMessage, "class");
+	 }
+  
    public String get_UpdatedAlertMessage() {
 	   generalutility=new GeneralUtility(driver);
  	    String string= generalutility.get_Text(updatedAlertMessage);
@@ -213,9 +219,13 @@ public class ManageExpensePage {
 		
 	   
    public boolean deleteAlertMessage_isDisplayed() {
-  	 generalutility=new GeneralUtility(driver);
-  	 return generalutility.is_Displayed(deleteAlert);
-   }
+  	   generalutility=new GeneralUtility(driver);
+  	   return generalutility.is_Displayed(deleteAlert);
+    }
+   public String get_FontStyleOfDeleteButton() {
+	   generalutility=new GeneralUtility(driver);
+	   return generalutility.get_CssValue(editUpdateButton, "font-style");
+	 }
   
    public void clickSearchButton() {
 	   searchButton.click();
@@ -242,10 +252,7 @@ public class ManageExpensePage {
 	   pageutility.scrollAndClick(searchButtonOfManageExpense); 
 	   
    }
-   public boolean searchButtonManageExpenseIsSelected() {
-	   generalutility=new GeneralUtility(driver);
-	   return generalutility.is_Selected(searchButtonOfManageExpense);
-   }
+  
    public void click_ReportButtonManageExpense() {
 	   pageutility.scrollAndClick(reportButtonOfManageExpense); 
 	   String parentWindow=driver.getWindowHandle();
@@ -264,10 +271,9 @@ public class ManageExpensePage {
 	   }
 	   
    }
-   public String get_TextNewWindowReport() {
-	   click_ReportButtonManageExpense();
+   public String get_TextListExpense() {
 	   generalutility=new GeneralUtility(driver);
-	   return generalutility.get_Text(nextWindowExpenseReport);
+	   return generalutility.get_Text(listExpenseText);
    }
    public void click_BackButton() {
 	   backButtonExpenseReport.click();

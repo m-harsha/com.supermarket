@@ -67,14 +67,14 @@ public class AdminUsersPage {
 		enterUserType();
 		clickOnSaveButton();	
 	}	
-	public String get_DangerAlertMessageNotification() {
+	 public String visibilityOfAlertNotification() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_Attribute(alertMessage, "class");
+	 }
+	public String get_AlertMessageNotification() {
 	    generalutility=new GeneralUtility(driver);
 	    return generalutility.get_Text(alertMessage);
 	}
-	public boolean alertMessage_isDisplayed() {
- 	    generalutility=new GeneralUtility(driver);
- 	    return generalutility.is_Displayed(alertMessage);
-    }
 	 public void deactivate_UserAction(String usersName) {
 		 int j=0;
 		 List<String> names=new ArrayList<String>();
@@ -93,6 +93,10 @@ public class AdminUsersPage {
 	 public boolean statusAlertMessage_isDisplayed() {
 	 	 generalutility=new GeneralUtility(driver);
 	 	 return generalutility.is_Displayed(statusAlertMessage);
+	 }
+	 public String get_BackgroundColorOfAlertMessage() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_CssValue(statusAlertMessage, "color");
 	 }
 
 }

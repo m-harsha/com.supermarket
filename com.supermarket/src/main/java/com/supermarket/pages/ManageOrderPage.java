@@ -19,6 +19,7 @@ public class ManageOrderPage {
 	GeneralUtility generalutility;
 	WaitUtility waitutility;
 	
+	
 	@FindBy(xpath="//i[@class='nav-icon fas fa-shopping-basket']")
 	private WebElement manageOrderLink;
 	@FindBy(xpath="(//select[@id='delivery_boy_id'])[1]")
@@ -31,7 +32,6 @@ public class ManageOrderPage {
 	private WebElement backButton;
 	@FindBy(xpath="//h1[@class='m-0 text-dark']")
 	private WebElement listOrderText;
-	
 	
 	public ManageOrderPage(WebDriver driver) {
 		this.driver=driver;
@@ -55,7 +55,6 @@ public class ManageOrderPage {
 		 WebElement deliveryBoyButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[6]//a)[3]"));
 		 deliveryBoyButton.click();
 	 }
-	
 	public void selectDeliveryBoy(String usersName) {
 		click_ManageOrder();
 		assignDeliveryBoyData(usersName);
@@ -64,38 +63,35 @@ public class ManageOrderPage {
 		pageutility.select_ByIndex(4,updateDeliveryBoy);
 	}
 	public void click_UpdateButton() {
-		waitutility=new WaitUtility(driver);
-		waitutility.element_ToBeClickable(10L, "(//button[@name='assign_del'])[1]");	
-		pageutility.scrollAndClick(updateButton);
-		//updateButton.click();
+		updateButton.click();
 	}
-	 public boolean alertMessage_IsDisplayed() {
-    	generalutility=new GeneralUtility(driver);
-    	return generalutility.is_Displayed(alertMessage);
-   }
+	 public String get_ColorOfAssignDeliveryBoy() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_CssValue(updateDeliveryBoy, "color");
+	 }
 	 public void viewListData(String usersName) {
-		int j=0;
-		List<String> names=new ArrayList<String>();
-		generalutility=new GeneralUtility(driver);
-		pageutility=new PageUtility(driver);
-		names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
-		   for(j=0;j<names.size();j++) {
-				if(usersName.equals(names.get(j))) {
-					j++;
-					break;	 
+			int j=0;
+			List<String> names=new ArrayList<String>();
+			generalutility=new GeneralUtility(driver);
+			pageutility=new PageUtility(driver);
+			names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+			   for(j=0;j<names.size();j++) {
+					if(usersName.equals(names.get(j))) {
+						j++;
+						break;	 
+					 }
 				 }
-			 }
-	   WebElement viewButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[7]//a)[1]"));
-	   viewButton.click();
-   }
+		   WebElement viewButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[7]//a)[1]"));
+		   viewButton.click();
+	 }
 	 public void click_BackButton() {
 		backButton.click();
-   }
-	 public boolean listOrderText_IsDisplayed() {
-	    generalutility=new GeneralUtility(driver);
-	    return generalutility.is_Displayed(listOrderText);
-   }
-	 
+    }
+	 public String get_TextOfListOrder() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_Text(listOrderText);
+	 }
+
 	
 
 }

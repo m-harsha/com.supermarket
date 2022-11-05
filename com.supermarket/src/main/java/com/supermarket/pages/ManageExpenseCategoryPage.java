@@ -26,7 +26,7 @@ public class ManageExpenseCategoryPage {
 	private WebElement saveButton;
 	@FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']")
 	private WebElement alertMessage;
-	@FindBy(xpath="//button[@name='Update']")
+	@FindBy(xpath="(//button[@type='submit'])[2]")
 	private WebElement editUpdateButton;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement updatedAlertMessage;
@@ -38,6 +38,8 @@ public class ManageExpenseCategoryPage {
 	private WebElement searchTitle;
 	@FindBy(xpath="//button[@name='Search']")
 	private WebElement searchData;
+	@FindBy(xpath="//h1[text()='Add Expense Category']")
+	private WebElement expenseText;
 	
 	public ManageExpenseCategoryPage(WebDriver driver) {
 		this.driver=driver;
@@ -66,6 +68,18 @@ public class ManageExpenseCategoryPage {
 		enterTitle(title);
 		clickOnSaveButton();
 	}
+	 public String visibilityOfAlertNotification() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_Attribute(alertMessage, "class");
+	 }
+	 public String get_ColorDangerAlert() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_CssValue(alertMessage, "color");
+	 }
+	 public String get_FontWeightOfSaveButton() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_CssValue(saveButton, "font-weight");
+	 }
 			
 	 public String get_DangerAlertMessageNotification() {
 	    generalutility=new GeneralUtility(driver);
@@ -75,10 +89,6 @@ public class ManageExpenseCategoryPage {
     	 generalutility=new GeneralUtility(driver);
     	 return generalutility.is_Displayed(alertMessage);
      }
-	 public boolean saveButtonIs_Selected() {
-		 generalutility=new GeneralUtility(driver);
-		 return generalutility.is_Selected(saveButton);
-	 }
 	
 	 public void click_EditOption(String usersName) {
 		 int j=0;
@@ -102,6 +112,14 @@ public class ManageExpenseCategoryPage {
 	 public void updateButton() {
 		 editUpdateButton.click();
 	 }
+	 public String get_FontSizeOfUpdateButton() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_CssValue(editUpdateButton, "font-size");
+	 }
+	 public String get_FontStyleOfDeleteButton() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_CssValue(editUpdateButton, "font-style");
+	 }
 	 public boolean updatedAlertMessage_IsDisplayed() {
 	  	 generalutility=new GeneralUtility(driver);
 	  	 return generalutility.is_Displayed(updatedAlertMessage);
@@ -119,8 +137,8 @@ public class ManageExpenseCategoryPage {
 		 }
 		 WebElement deactivateactionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[2]//a)[2]"));
 		 deactivateactionButton.click();
-		 driver.switchTo().alert().accept();
-		//driver.switchTo().alert().dismiss();	 
+		// driver.switchTo().alert().accept();
+		driver.switchTo().alert().dismiss();	 
 	 }
 	
 	 public boolean deleteAlertMessage_isDisplayed() {
@@ -130,6 +148,10 @@ public class ManageExpenseCategoryPage {
 	 public void clickSearchButton() {
 		 searchButton.click();	   
 	 }
+	 public String get_ColorSearchButton() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_CssValue(searchButton, "color");
+	 }
 	 public void searchedTitle(String title) {
 		clickSearchButton();
 		searchTitle.sendKeys(title);
@@ -137,10 +159,11 @@ public class ManageExpenseCategoryPage {
 	 public void click_SearchButtonExpenseCategory() {
 		 searchData.click();	
      }
-	 public boolean searchButtonManageExpenseCategoryIsSelected() {
-  	    generalutility=new GeneralUtility(driver);
-  	    return generalutility.is_Selected(searchData);
-    }
+	
+	 public String get_TextExpenseCategory() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_Text(expenseText);
+	 }
 	 
 	 
 	 

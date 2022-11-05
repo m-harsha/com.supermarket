@@ -18,27 +18,22 @@ public class ManageDeliveryBoyTest extends Base {
 	
 	@Test
 	public void verify_Add_NewDeliveryBoy() {
-		String name;
-    	String email;
-    	String phone;
-    	String address;
-		String userName;
-		String password;
 		excel.setExcelFile("Delivery Boy Details","DeliveryBoyInformations");
-		name=excel.getCellData(0,0);
-		email=excel.getCellData(0,1);
-		phone=excel.getCellData(0,2);
-		address=excel.getCellData(0,3);
-		userName=excel.getCellData(0,4);
-		password=excel.getCellData(0,5);
-		
+		String name=excel.getCellData(0,0);
+		String email=excel.getCellData(0,1);
+		String phone=excel.getCellData(0,2);
+		String address=excel.getCellData(0,3);
+		String userName=excel.getCellData(0,4);
+		String password=excel.getCellData(0,5);	
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		deliveryboypage=new ManageDeliveryBoyPage(driver);
 		deliveryboypage.create_DeliveryBoy(name,email,phone,address,userName,password);
-		System.out.println(deliveryboypage.get_DangerAlertMessageNotification());
-		Assert.assertTrue(deliveryboypage.alertMessage_isDisplayed());
+		String actualresult=deliveryboypage.visibilityOfAlertNotification();
+		String expectedresult=Constants.EXPECTED_ALERT;
+		Assert.assertEquals(actualresult,expectedresult);
 	}
+			
 	
 	@Test(groups= {"smoke","sanity"})
 	public void verify_DeliveryBoyStatusDeactivation() {
@@ -47,34 +42,27 @@ public class ManageDeliveryBoyTest extends Base {
 		deliveryboypage=new ManageDeliveryBoyPage(driver);
 		deliveryboypage.clickOnDeliveryBoy();
 		deliveryboypage.deactivate_UserStatus("name");
-		System.out.println(deliveryboypage.get_AlertMessageNotification());
-		Assert.assertTrue(deliveryboypage.is_DeactivateActionAlertMessageDisplayed());		
+		String actualresult=deliveryboypage.visibilityOfDeactivateAlertNotification();
+		String expectedresult=Constants.EXPECTED_DEACTIVATEALERT;
+		Assert.assertEquals(actualresult,expectedresult);
+			
     }	
 	
 	@Test
-	public void verify_DeleteDeliveryBoyAction() {
+	public void verify_DeleteDeliveryBoyData() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		deliveryboypage=new ManageDeliveryBoyPage(driver);
 		deliveryboypage.clickOnDeliveryBoy();
 		deliveryboypage.delete_DeliveryBoy("Aimy");
-		Assert.assertTrue(deliveryboypage.deleteAlertMessage_isDisplayed());
-    }
-	
-	@Test
-	public void verify_BackGroundColorOfNewButton() {
-		loginpage=new LoginPage(driver);
-		loginpage.login();
-		deliveryboypage=new ManageDeliveryBoyPage(driver);
-		deliveryboypage.clickOnDeliveryBoy();
-		String actualbackgroundcolor=deliveryboypage.get_Backgroundcolor_NewButton();
-		System.out.println(actualbackgroundcolor);
-		String expectedbackgroundcolor=Constants.EXPECTEDBACKGROUNDCOLOR;
-		Assert.assertEquals(actualbackgroundcolor, expectedbackgroundcolor);
+		String actualresult=deliveryboypage.visibilityOfDeleteAlertNotification();
+		String expectedresult=Constants.EXPECTED_DELETEALERT;
+		Assert.assertEquals(actualresult,expectedresult);
 	}
-	
+			
+		
 	@Test(dataProvider="DeliveryBoy",dataProviderClass=DataProviderClass.class)
-	public void create_DeliveryBoyDetailsByDataproviderclass(String data1,String data2,String data3,String data4,String data5,String data6) {
+	public void verify_DeliveryBoyDetailsByDataproviderclass(String data1,String data2,String data3,String data4,String data5,String data6) {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		deliveryboypage=new ManageDeliveryBoyPage(driver);
@@ -87,7 +75,9 @@ public class ManageDeliveryBoyTest extends Base {
 		deliveryboypage.enterUserName(data5);
 		deliveryboypage.enterPassword(data6);
 		deliveryboypage.click_SaveButton();	
-		Assert.assertTrue(deliveryboypage.is_SaveButtonDisplayed());		
+		String actualcolor=deliveryboypage.get_ColorOfSaveButton();
+		String expectedcolor=Constants.EXPECTEDCOLOR_SAVEBUTTON;
+		Assert.assertEquals(actualcolor,expectedcolor);
     }
 	
 	@Test
@@ -97,8 +87,7 @@ public class ManageDeliveryBoyTest extends Base {
 		deliveryboypage=new ManageDeliveryBoyPage(driver);
 		deliveryboypage.create_DeliveryBoy("Ami","ami@gmail.com","897565634","erty2y","ana","wet87");
 		String expectedresult=Constants.EXPECTED_ALERT_TEXT1;
-		String actualresult=deliveryboypage.get_DangerAlertMessageNotification();
-		System.out.println(actualresult);
+		String actualresult=deliveryboypage.get_AlertMessageNotification();
 		Assert.assertEquals(actualresult, expectedresult,"This testcase failed");
      }
 	

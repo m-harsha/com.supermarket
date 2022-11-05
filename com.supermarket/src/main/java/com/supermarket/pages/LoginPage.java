@@ -30,6 +30,8 @@ public class LoginPage {
 	private WebElement rememeberMeLabel;
 	@FindBy(xpath="//i[@class='ace-icon fa fa-power-off']")		
 	private WebElement logout;
+	@FindBy(xpath="//p[text()='Sign in to start your session']")		
+	private WebElement signInText;
 	
 		
 	public LoginPage(WebDriver driver) {
@@ -83,10 +85,10 @@ public class LoginPage {
     	clickOnProfileImage();
     	logout.click();
     }
-    public boolean is_SignInButtonDisplayed() {
-	    generalutility=new GeneralUtility(driver);
-	    return generalutility.is_Displayed(signIn);		
-	}
+    public String getTextOfSignIn() {
+    	generalutility=new GeneralUtility(driver);
+    	return generalutility.get_Text(signInText);
+    }
    
    
 

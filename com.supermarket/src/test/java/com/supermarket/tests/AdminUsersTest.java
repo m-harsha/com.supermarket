@@ -17,19 +17,18 @@ public class AdminUsersTest extends Base {
 	
 	@Test
 	public void verify_Add_NewAdminUsers() {
-		String userName;
-		String password;
 		excel.setExcelFile("Admin Users Details","AdminUsersInformations");
-		userName=excel.getCellData(0, 0);
-		password=excel.getCellData(0, 1);
-		
+		String userName=excel.getCellData(0, 0);
+		String password=excel.getCellData(0, 1);	
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.adminUsersDetails(userName,password);
-		System.out.println(adminuserspage.get_DangerAlertMessageNotification());
-		Assert.assertTrue(adminuserspage.alertMessage_isDisplayed());
+		String actualresult=adminuserspage.visibilityOfAlertNotification();
+		String expectedresult=Constants.EXPECTED_ADMINALERT;
+		Assert.assertEquals(actualresult,expectedresult);
 	}
+		
 	
 	@Test
 	public void verify_AdminUserStatusDeactivation() {
@@ -37,9 +36,13 @@ public class AdminUsersTest extends Base {
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.clickOnAdminUsers();
-		adminuserspage.deactivate_UserAction("devi123");
-		Assert.assertTrue(adminuserspage.statusAlertMessage_isDisplayed());
+		adminuserspage.deactivate_UserAction("terry@20");
+		adminuserspage.statusAlertMessage_isDisplayed();
+		String actualcolor=adminuserspage.get_BackgroundColorOfAlertMessage();
+		String expectedcolor=Constants.EXPECTEDBACKGROUNDCOLOR_ALERT;
+		Assert.assertEquals(actualcolor,expectedcolor);
 	}
+	
 	
 	@Test
 	public void verify_AdminUsersTextAlertMessage() {
@@ -48,8 +51,7 @@ public class AdminUsersTest extends Base {
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.adminUsersDetails("ani", "ani345");
 		String expectedresult=Constants.EXPECTED_ALERTTEXT3;
-		String actualresult=adminuserspage.get_DangerAlertMessageNotification();
-		System.out.println(actualresult);
+		String actualresult=adminuserspage.get_AlertMessageNotification();
 		Assert.assertEquals(actualresult, expectedresult,"This testcase failed");
 	}
 	

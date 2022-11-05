@@ -1,5 +1,6 @@
 package com.supermarket.pages;
 
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -63,6 +64,7 @@ public class ManageProductPage {
 	private WebElement saveButton;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement alertMessage;
+	
 	
 	public ManageProductPage(WebDriver driver) {
 		this.driver=driver;
@@ -174,13 +176,12 @@ public class ManageProductPage {
 		pageutility=new PageUtility(driver);
     	pageutility.scrollAndClick(saveButton); 
 	}
-	public boolean alertMessage_IsDisplayed() {
-	    generalutility=new GeneralUtility(driver);
-	    return generalutility.is_Displayed(alertMessage);
-    }
-	
-	
-	
+	 public String visibilityOfAlertNotification() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_Attribute(alertMessage, "class");
+	}
+	 
+		
 	
 	
 	

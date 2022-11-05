@@ -58,14 +58,20 @@ public class PushNotificationPage {
 		 generalutility=new GeneralUtility(driver);
     	 return generalutility.is_Displayed(alertSuccessText);
 	 }
-	 public boolean is_SaveButtonEnabled() {
-		 generalutility=new GeneralUtility(driver);
-    	 return generalutility.is_Displayed(sendButton);
-	 }
-	public String get_Color_SendButton() {
+	public String get_ColorOfSendButton() {
 		 generalutility=new GeneralUtility(driver);
 		 return generalutility.get_CssValue(sendButton, "color");
 	 }
+	
+	 public String get_ColorOfAlert() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_CssValue( alertSuccessText, "color");
+	 }
+	 public String visibilityOfAlertNotification() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_Attribute(alertSuccessText, "class");
+	 }
+	
 	
 	
 }

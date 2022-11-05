@@ -20,9 +20,13 @@ public class ManageProductTest extends Base {
 		manageproduct.enterProductDetails("Milk","rty","20","5","30","25","10","25","fresh milk");
 		manageproduct.imageUpload(Constants.IMAGE_UPLOAD +"\\image1.jpeg");
 		manageproduct.clickOnSaveButton();
-		Assert.assertTrue(manageproduct.alertMessage_IsDisplayed());
-		
+		String actualresult=manageproduct.visibilityOfAlertNotification();
+		String expectedresult=Constants.EXPECTED_ORDERALERT;
+		Assert.assertEquals(actualresult,expectedresult);
 	}
+		
+		
+	
 	
 
 }

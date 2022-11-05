@@ -8,7 +8,7 @@
           <include name="setUp"/>
           <include name="setUpCrossBrowser"/>
           <include name="tearDown"/>
-          <include name="verify_OrderIdViewList"/>
+          <include name="verify_UpdatedDetailsOfDeliveryBoy"/>
         </methods>
       </class> <!-- com.supermarket.tests.ManageOrderTest -->
     </classes>
