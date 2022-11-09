@@ -17,9 +17,9 @@ public class Constants {
 	
 	public static final String EXPECTED_ALERTTEXT4=
             "Expense Record Updated Successfully";   
-	public static final String EXPECTEDCOLOR_SAVE_EXPENSE="rgba(255, 255, 255, 1)";
-	public static final String EXPECTEDSTYLE_DELETE_EXPENSE="normal";
-	public static final String EXPECTED_EXPENSETEXT="List Expense";
+	public static final String EXPECTED_BACKGROUNDCOLOR_ALERT="rgba(40, 167, 69, 1)";
+	public static final String EXPECTED_DATAREPORT=".........RESULT NOT FOUND.......";
+	public static final String EXPECTED_EXPENSEREPORT="Expense Report";
 	
 	
 	
@@ -47,9 +47,9 @@ public class Constants {
 	
 	public static final String EXPECTED_DEACTIVATEALERT="alert alert-success alert-dismissible";
 	public static final String EXPECTED_ALERT="alert alert-danger alert-dismissible";
-	public static final String EXPECTED_DELETEALERT="alert alert-success alert-dismissible";
-	public static final String EXPECTED_ALERT_TEXT1="Alert!";
-	public static final String EXPECTEDCOLOR_SAVEBUTTON="rgba(255, 255, 255, 1)";
+	public static final String EXPECTEDRESULT_DELETEDATA=".........RESULT NOT FOUND.......";
+	public static final String EXPECTEDRESULT_SEARCHNAME="Anamik_";
+	public static final String EXPECTEDBACKGROUNDCOLOR_DANGERALERT="rgba(220, 53, 69, 1)";
 	
 	
 	
@@ -57,14 +57,14 @@ public class Constants {
 	
 	public static final String EXPECTEDALERT="alert alert-success alert-dismissible";
 	public static final String EXPECTEDCOLOR="rgba(255, 255, 255, 1)";
-	public static final String EXPECTEDALERTCOLOR="rgba(255, 255, 255, 1)";
+	public static final String EXPECTED_BACKGROUNDCOLORALERT="rgba(40, 167, 69, 1)";
 	
 	
 	
 	 /**ManageOder page**/
 	
-	public static final String EXPECTEDCOLOR_ASSIGNDELIVERYBOY="rgba(73, 80, 87, 1)";
-	public static final String EXPECTED_TEXT_LIST="List Orders";
+	public static final String EXPECTEDCOLOR_ASSIGNDELIVERYBOYALERT="rgba(255, 255, 255, 1)";
+	public static final String EXPECTED_TEXT_ORDER="Order Details";
 	
 	
    /**ManageLocation page**/
@@ -72,9 +72,8 @@ public class Constants {
 	public static final String EXPECTED_ALERTTEXT="Alert!";
 	public static final String EXPECTED_LOCATIONALERT="alert alert-success alert-dismissible";
 	public static final String EXPECTEDBACKGROUNDCOLOR_DEACTIVATEALERT="rgba(40, 167, 69, 1)";
-	public static final String EXPECTEDSTYLE_DELETEALERT="normal";
 	public static final String EXPECTEDCOLOR_UPDATEALERT="rgba(255, 255, 255, 1)";
-	public static final String EXPECTEDBACKGROUNDCOLOR_SEARCH="rgba(255, 255, 255, 1)";
+	
 	
 	
 	
@@ -89,11 +88,10 @@ public class Constants {
   /**ManageExpenseCategory page**/
 	
 	 public static final String EXPECTED_CATEGORYALERT="alert alert-danger alert-dismissible";	
-	 public static final String EXPECTEDWEIGHT_SAVEBUTTON="400";
-	 public static final String EXPECTEDSIZE_UPDATEBUTTON="16px";
-	 public static final String EXPECTED_STYLEDELETEALERT="normal";
-	 public static final String EXPECTEDTEXT="Add Expense Category";
-	 public static final String EXPECTEDCOLOR_SEARCHBUTTON="rgba(255, 255, 255, 1)";
+	 public static final String EXPECTEDCOLOROFALERT="rgba(255, 255, 255, 1)";
+	 public static final String EXPECTED_DATA=".........RESULT NOT FOUND.......";
+	 
+	
 		
 		 
 	           

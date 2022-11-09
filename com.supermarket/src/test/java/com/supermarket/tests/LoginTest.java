@@ -41,8 +41,7 @@ public class LoginTest extends Base {
 		loginpage.clickOnLogOut();
 		String actualtext=loginpage.getTextOfSignIn();
 		String expectedtext=Constants.EXPECTED_SIGNINTEXT;
-		Assert.assertEquals(actualtext, expectedtext);
-		
+		Assert.assertEquals(actualtext, expectedtext);		
 	}
 	
 }

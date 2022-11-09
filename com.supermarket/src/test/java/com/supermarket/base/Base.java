@@ -20,28 +20,22 @@ import com.supermarket.utilities.WaitUtility;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Base {
-	
 	public WebDriver driver;
 	Properties prop;
 	FileInputStream ip;
 	ScreenShot screenshot;
 	
-   public Base(){
-	   
+   public Base(){ 
 		prop=new Properties();
-		
 		try {
 			ip=new FileInputStream(Constants.CONFIG_FILE_PATH);
-			prop.load(ip);
-			
+			prop.load(ip);	
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
+	}	
 	public void initialize(String browser, String url) {
-		
 		if(browser.equals("chrome")) {
 			WebDriverManager.chromedriver().setup();
 			driver=new ChromeDriver();
@@ -59,16 +53,13 @@ public class Base {
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WaitUtility.IMPLICIT_WAIT));
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(WaitUtility.PAGE_LOAD_WAIT));
-		
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(WaitUtility.PAGE_LOAD_WAIT));		
 	}
+	
 	@Parameters("browser")
 	@BeforeMethod(enabled=false)
 	public void setUpCrossBrowser(String browser) {
-		
-		//String browser;
 		String url;
-		//browser=prop.getProperty("browser");
 		url=prop.getProperty("url");
 		initialize(browser,url);		
 	}
@@ -90,5 +81,6 @@ public class Base {
 	}
 		//driver.close();
 }
+	
 	
 }

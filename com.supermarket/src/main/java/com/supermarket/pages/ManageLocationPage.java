@@ -49,6 +49,8 @@ public class ManageLocationPage {
 	private WebElement searchButton;
 	@FindBy(xpath="//button[@class='btn btn-danger btn-fix align-center']")
 	private WebElement searchButtonOfManageLocation;
+	@FindBy(xpath="//tbody//tr//td")
+	private WebElement searchTable;
 	
 	
 	public ManageLocationPage(WebDriver driver) {
@@ -62,13 +64,13 @@ public class ManageLocationPage {
 	public void clickOnNewButton() {
 		newButton.click();	
     }
-	public void enterTheCountry() {
+	public void enterTheCountry(int a) {
     	pageutility=new PageUtility(driver);
-    	pageutility.select_ByIndex(1,country);
+    	pageutility.select_ByIndex(a,country);
     }
-	public void enterTheState() {
+	public void enterTheState(int b) {
     	pageutility=new PageUtility(driver);
-    	pageutility.select_ByIndex(2,state);
+    	pageutility.select_ByIndex(b,state);
     }
 	public void enterTheLocation(String location) {
     	locationField.sendKeys(location);
@@ -79,12 +81,7 @@ public class ManageLocationPage {
 	public void clickOnSaveButton() {
 		saveButton.click();
 	}
-	
 	public void ManageLocationDetails(String location,String deliverycharge) {
-		clickOnManageLocation();
-		clickOnNewButton();
-		enterTheCountry();
-		enterTheState();
 		enterTheLocation(location);
 		enterTheDeliveryCharge(deliverycharge);
 		clickOnSaveButton();
@@ -146,17 +143,13 @@ public class ManageLocationPage {
 		 }
 		 WebElement deleteActionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[6]//a)[2]"));
 		 deleteActionButton.click();
-		 driver.switchTo().alert().accept();	
-		//driver.switchTo().alert().dismiss();	 
+		 driver.switchTo().alert().accept();	 
 	 }
 	 public boolean deleteAlertMessage_isDisplayed() {
     	 generalutility=new GeneralUtility(driver);
     	 return generalutility.is_Displayed(deleteAlert);
      }
-	 public String get_FontStyleOfDeleteButton() {
-		   generalutility=new GeneralUtility(driver);
-		   return generalutility.get_CssValue(editUpdateButton, "font-style");
-		 }
+	
 	 public void click_EditOption(String usersName) {
 		 int j=0;
 		 List<String> names=new ArrayList<String>();
@@ -171,10 +164,10 @@ public class ManageLocationPage {
 		 WebElement editActionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[6]//a)[1]"));
 		 editActionButton.click();
 	 }
-	 public void enter_StateDataUpdation(String usersName) {
+	 public void enter_StateDataUpdation(String usersName,int c) {
 		 click_EditOption(usersName);
 		 pageutility=new PageUtility(driver);
-		 pageutility.select_ByIndex(5,state);
+		 pageutility.select_ByIndex(c,state);
 	 }
 	 public void updateButton() {
 		 waitutility=new WaitUtility(driver);
@@ -185,19 +178,19 @@ public class ManageLocationPage {
 	  	 generalutility=new GeneralUtility(driver);
 	  	 return generalutility.is_Displayed(updatedAlertMessage);
 	  }
-	 public String get_ColorOfUpdateButton() {
+	 public String get_ColorOfUpdateAlertMessage() {
 		  generalutility=new GeneralUtility(driver);
-		  return generalutility.get_CssValue(editUpdateButton, "color");
+		  return generalutility.get_CssValue(updatedAlertMessage, "color");
 	  }
 	 public void clickSearchButton() {
 		 searchButton.click();	   
 	   }
-	 public void search_CategoriesOfManageLocation() {
+	 public void search_CategoriesOfManageLocation(int x,int y) {
 		 country.click();
 	     pageutility=new PageUtility(driver);
-		 pageutility.select_ByIndex(1, country);
+		 pageutility.select_ByIndex(x, country);
 		 state.click();
-		 pageutility.select_ByVisibleText("Argyll", state);	 
+		 pageutility.select_ByIndex(y, state);	 
 	 }
 	 public void entersearchedLocation(String location) {
 	    	locationField.sendKeys(location);
@@ -208,6 +201,10 @@ public class ManageLocationPage {
 	 public String get_BackgroundcolorOfSearchButton() {
 		 generalutility=new GeneralUtility(driver);
 		 return generalutility.get_CssValue(searchButtonOfManageLocation,"color");
+	 }
+	 public boolean is_DisplayedSearchedData() {
+		 generalutility=new GeneralUtility(driver);
+    	 return generalutility.is_Displayed(searchTable);
 	 }
 		  
 }

@@ -75,8 +75,10 @@ public class ManageExpensePage {
 	private WebElement nextWindowExpenseReport;
 	@FindBy(xpath="//span[@id='back']")
 	private WebElement backButtonExpenseReport;
-	@FindBy(xpath="//h1[text()='List Expense']")
-	private WebElement listExpenseText;
+	@FindBy(xpath="//h4[@class='card-title']")
+	private WebElement resultReport;
+	@FindBy(xpath="//span[@id='res']")
+	private WebElement deletedDataReport;
 	
 	public ManageExpensePage(WebDriver driver) {
 		this.driver=driver;
@@ -91,30 +93,30 @@ public class ManageExpensePage {
 	public void clickOnNewButton() {
 		newButton.click();
 	}
-	public void clickOnUserType() {
+	public void clickOnUserType(int a) {
 		user.click();
 		pageutility=new PageUtility(driver);
-		pageutility.select_ByIndex(2, user);
+		pageutility.select_ByIndex(a, user);
 	}
-	public void clickOnCategory() {
+	public void clickOnCategory(int b) {
 		category.click();
 		pageutility=new PageUtility(driver);
-		pageutility.select_ByIndex(2, category);
+		pageutility.select_ByIndex(b, category);
 	}
-	public void clickOnOrderId() {
+	public void clickOnOrderId(int c) {
 		orderId.click();
 		pageutility=new PageUtility(driver);
-		pageutility.select_ByIndex(3, orderId);
+		pageutility.select_ByIndex(c, orderId);
 	}
-	public void clickOnPurchaseId() {
+	public void clickOnPurchaseId(int d) {
 		purchaseId.click();
 		pageutility=new PageUtility(driver);
-		pageutility.select_ByIndex(3, purchaseId);
+		pageutility.select_ByIndex(d, purchaseId);
 	}
-	public void clickOnExpenseType() {
+	public void clickOnExpenseType(int e) {
 		expensetype.click();
 		pageutility=new PageUtility(driver);
-		pageutility.select_ByIndex(4,expensetype);
+		pageutility.select_ByIndex(e,expensetype);
 	}
 	public void enterAmount(String amount) {
 		amountField.sendKeys(amount);
@@ -134,17 +136,10 @@ public class ManageExpensePage {
     	pageutility.scrollAndClick(saveButton); 
 		
 	}
-	public void enter_PageInformations(String amount,String remarks) {
+	public void clickOnNewExpense() {
 		clickOnManageExpense();
 		clickOnExpense();
 		clickOnNewButton();
-		clickOnUserType();
-		clickOnCategory();
-		clickOnOrderId();
-		clickOnPurchaseId();
-		clickOnExpenseType();
-		enterAmount(amount);
-		enterRemarks(remarks);
 	}
 	
 	 public String visibilityOfAlertNotification() {
@@ -156,9 +151,9 @@ public class ManageExpensePage {
    	    generalutility=new GeneralUtility(driver);
    	    return generalutility.get_Text(alertMessage);
     }
-   public String get_ColorOfSaveButton() {
+   public String get_BackgroundColorOfAlertMessage() {
 		 generalutility=new GeneralUtility(driver);
-		 return generalutility.get_CssValue(saveButton, "color");
+		 return generalutility.get_CssValue(alertMessage, "background-color");
 	 }
   
    public void edit_ExpenseData(String usersName) {
@@ -175,10 +170,10 @@ public class ManageExpensePage {
 		WebElement editActionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[9]//a)[1]"));
 		editActionButton.click();
    }
-   public void enter_OrderIdDataUpdation() {
+   public void enter_OrderIdDataUpdation(int f) {
 	   orderId.click();
 	   pageutility=new PageUtility(driver);
-	   pageutility.select_ByIndex(9, orderId);
+	   pageutility.select_ByIndex(f, orderId);
 	   
    }
    public void updateButton() {
@@ -214,46 +209,30 @@ public class ManageExpensePage {
 		WebElement deleteactionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[9]//a)[2]"));
 		deleteactionButton.click();
 		driver.switchTo().alert().accept();
-		//driver.switchTo().alert().dismiss();	 
-	}
-		
-	   
+	}	   
    public boolean deleteAlertMessage_isDisplayed() {
   	   generalutility=new GeneralUtility(driver);
   	   return generalutility.is_Displayed(deleteAlert);
     }
-   public String get_FontStyleOfDeleteButton() {
+   public String get_ReportOfDeletedData() {
 	   generalutility=new GeneralUtility(driver);
-	   return generalutility.get_CssValue(editUpdateButton, "font-style");
-	 }
-  
+	   return generalutility.get_Text(deletedDataReport);
+   }
    public void clickSearchButton() {
-	   searchButton.click();
-	   
+	   searchButton.click();	   
    }
    public void search_EnterTitle(String name) {
 	   searchEnterTitle.sendKeys(name);
    }
-   public void search_CategoriesOfManageExpense() {
-	   searchUsers.click();
-	   pageutility=new PageUtility(driver);
-	   pageutility.select_ByIndex(7, searchUsers);
-	   searchCategory.click();
-	   pageutility=new PageUtility(driver);
-	   pageutility.select_ByIndex(5, searchCategory);
-	   searchExpenseType.click();
-	   pageutility.select_ByVisibleText("Debit Bank", searchExpenseType);
-	   searchOrderId.click();
-	   pageutility.select_ByIndex(9, searchOrderId);
-	   searchPurchaseId.click();
-	   pageutility.select_ByIndex(10, searchPurchaseId);
-   }
+ 
    public void click_SearchButtonManageExpense() {
+	   pageutility=new PageUtility(driver);
 	   pageutility.scrollAndClick(searchButtonOfManageExpense); 
 	   
    }
   
    public void click_ReportButtonManageExpense() {
+	   pageutility=new PageUtility(driver);
 	   pageutility.scrollAndClick(reportButtonOfManageExpense); 
 	   String parentWindow=driver.getWindowHandle();
 	   System.out.println(parentWindow);
@@ -271,9 +250,9 @@ public class ManageExpensePage {
 	   }
 	   
    }
-   public String get_TextListExpense() {
+   public String get_TextOfSearchedData() {
 	   generalutility=new GeneralUtility(driver);
-	   return generalutility.get_Text(listExpenseText);
+	   return generalutility.get_Text(resultReport);
    }
    public void click_BackButton() {
 	   backButtonExpenseReport.click();

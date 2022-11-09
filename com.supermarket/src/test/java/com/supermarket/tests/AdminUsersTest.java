@@ -16,7 +16,7 @@ public class AdminUsersTest extends Base {
 	AdminUsersPage adminuserspage;
 	
 	@Test
-	public void verify_Add_NewAdminUsers() {
+	public void verify_CreateNewAdminUsers() {
 		excel.setExcelFile("Admin Users Details","AdminUsersInformations");
 		String userName=excel.getCellData(0, 0);
 		String password=excel.getCellData(0, 1);	
@@ -24,11 +24,12 @@ public class AdminUsersTest extends Base {
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.adminUsersDetails(userName,password);
+		adminuserspage.enterUserType(2);
+		adminuserspage.clickOnSaveButton();
 		String actualresult=adminuserspage.visibilityOfAlertNotification();
 		String expectedresult=Constants.EXPECTED_ADMINALERT;
 		Assert.assertEquals(actualresult,expectedresult);
-	}
-		
+	}		
 	
 	@Test
 	public void verify_AdminUserStatusDeactivation() {
@@ -43,13 +44,27 @@ public class AdminUsersTest extends Base {
 		Assert.assertEquals(actualcolor,expectedcolor);
 	}
 	
-	
+	@Test
+	public void verify_CreateAdminUserData_LogOutLogIn() {
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		adminuserspage=new AdminUsersPage(driver);
+		adminuserspage.adminUsersDetails("binn","binn12");
+		adminuserspage.enterUserType(2);
+		adminuserspage.clickOnSaveButton();
+		adminuserspage.clickOnLogout();
+		loginpage.login("binn","binn12");
+		Assert.assertTrue(adminuserspage.is_ProfileNameDisplayed());
+	}
+		
 	@Test
 	public void verify_AdminUsersTextAlertMessage() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.adminUsersDetails("ani", "ani345");
+		adminuserspage.enterUserType(2);
+		adminuserspage.clickOnSaveButton();
 		String expectedresult=Constants.EXPECTED_ALERTTEXT3;
 		String actualresult=adminuserspage.get_AlertMessageNotification();
 		Assert.assertEquals(actualresult, expectedresult,"This testcase failed");

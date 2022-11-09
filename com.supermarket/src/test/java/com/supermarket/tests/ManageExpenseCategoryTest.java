@@ -15,7 +15,7 @@ public class ManageExpenseCategoryTest extends Base {
 	LoginPage loginpage;
 	ManageExpenseCategoryPage category;
 	
-	@Test
+	@Test(priority=1)
 	public void verify_Add_NewExpenseCategory() {
 		excel.setExcelFile("Expense Category","ExpenseCategoryInformations");
 		String title=excel.getCellData(0, 0);
@@ -27,60 +27,55 @@ public class ManageExpenseCategoryTest extends Base {
 		String expectedresult=Constants.EXPECTED_CATEGORYALERT;
 		Assert.assertEquals(actualresult,expectedresult);
 	}
-
 	
 	@Test
-	public void verify_ExpenseCategoryFunctionalities() {
+	public void verify_CreateExpenseCategoryDetails() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		category=new ManageExpenseCategoryPage(driver);
-		category.expenseCategoryDetails("vegetables1");
-		String actualfontWeight=category.get_FontWeightOfSaveButton();
-		String expectedfontWeight=Constants.EXPECTEDWEIGHT_SAVEBUTTON;
-		Assert.assertEquals(actualfontWeight, expectedfontWeight);
+		category.expenseCategoryDetails("vegetables3");
+		String actualcolor=category.get_ColorOfAlertMessage();
+		String expectedcolor=Constants.EXPECTEDCOLOROFALERT;
+		Assert.assertEquals(actualcolor, expectedcolor);
     }
 	
-	@Test
-	public void verify_UpdateDetailsOfManageExpenseCategory() {
+	@Test(priority=2)
+	public void verify_UpdateFunctionalityOfManageExpenseCategory() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		category=new ManageExpenseCategoryPage(driver);
 		category.clickOnManageExpense();
 		category.clickOnExpenseCategory();
-		category.enterUpdatedTitle("Nutts1","Nutts2");
+		category.enterUpdatedTitle("grapes","Grapess");
 		category.updateButton();
-		String actualfontsize=category. get_FontSizeOfUpdateButton();
-		String expectedfontsize=Constants.EXPECTEDSIZE_UPDATEBUTTON;
-		Assert.assertEquals(actualfontsize, expectedfontsize);
+		Assert.assertTrue(category.updatedAlertMessage_IsDisplayed());
     }
 		
-	@Test
-	public void verify_DeleteExpenseCategory() {
+	@Test(priority=3)
+	public void verify_DeleteExpenseCategoryData() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		category=new ManageExpenseCategoryPage(driver);
 		category.clickOnManageExpense();
 		category.clickOnExpenseCategory();
-		category.delete_ManageExpenseCategory("Biscuits");
-		String actualfontstyle=category. get_FontStyleOfDeleteButton();
-		String expectedfontstyle=Constants.EXPECTED_STYLEDELETEALERT;
-		Assert.assertEquals(actualfontstyle, expectedfontstyle);
-	
+		category.delete_ManageExpenseCategory("orange11111");
+		category.searchedTitle("orange11111");
+		category.click_SearchButtonExpenseCategory();
+		String actualtext=category. get_ReportOfDeletedData();
+		String expectedtext=Constants.EXPECTED_DATA;
+		Assert.assertEquals(actualtext, expectedtext);	
 	}
 	
-	@Test
-	public void verify_SearchedDataOfManageExpenseCategory() {
+	@Test(priority=4)
+	public void verify_Search_ManageExpenseCategory() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		category=new ManageExpenseCategoryPage(driver);
 		category.clickOnManageExpense();
 		category.clickOnExpenseCategory();
-		category.searchedTitle("Diary123");
+		category.searchedTitle("Diary");
 		category.click_SearchButtonExpenseCategory();	
-		String actualcolor=category. get_ColorSearchButton();
-		String expectedcolor=Constants.EXPECTEDCOLOR_SEARCHBUTTON;
-		Assert.assertEquals(actualcolor, expectedcolor);
-	
+		Assert.assertTrue(category.SearchedData_isDisplayed());		
 	}
 	
 	@Test(dataProvider="ManageExpenseCategory",dataProviderClass=DataProviderClass.class)
@@ -91,12 +86,7 @@ public class ManageExpenseCategoryTest extends Base {
 		category.clickOnManageExpense();
 		category.clickOnExpenseCategory();
 		category.expenseCategoryDetails(data1);
-		category.alertMessage_IsDisplayed();	
-		String actualtext=category. get_TextExpenseCategory();
-		String expectedtext=Constants.EXPECTEDTEXT;
-		Assert.assertEquals(actualtext, expectedtext);
+		Assert.assertTrue(category.expenseCategoryDetails_isDisplayed());	
     }
-		
-	
 	
 }

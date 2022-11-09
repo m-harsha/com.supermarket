@@ -40,6 +40,16 @@ public class ManageDeliveryBoyPage {
 	private WebElement deactivateAlert;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement deleteAlert;
+	@FindBy(xpath="//a[@class='btn btn-rounded btn-primary']")
+	private WebElement searchButton;
+	@FindBy(xpath="//input[@id='un']")
+	private WebElement searchName;
+	@FindBy(xpath="//button[@name='Search']")
+	private WebElement searchFieldButton;
+	@FindBy(xpath="//tbody//tr[1]//td[1]")
+	private WebElement searchNameText;
+	@FindBy(xpath="//span[@id='res']")
+	private WebElement deleteDataReport;
 	
 	public ManageDeliveryBoyPage(WebDriver driver) {
 		this.driver=driver;
@@ -93,6 +103,10 @@ public class ManageDeliveryBoyPage {
     	generalutility=new GeneralUtility(driver);
     	return generalutility.get_Text(alertMessage);
     }
+    public boolean alertMessage_isDisplayed() {
+    	 generalutility=new GeneralUtility(driver);
+    	 return generalutility.is_Displayed(alertMessage);
+    }
     public void deactivate_UserStatus(String usersName) {
 		 int j=0;
 		 List<String> names=new ArrayList<String>();
@@ -124,22 +138,39 @@ public class ManageDeliveryBoyPage {
 		 deactivateactionButton.click();
 		 driver.switchTo().alert().accept();	
 	 }
-	 public String visibilityOfDeleteAlertNotification() {
+	 public String get_ColorOfDeleteAlert() {
 		 generalutility=new GeneralUtility(driver);
-		 return generalutility.get_Attribute(deleteAlert, "class");
+		 return generalutility.get_CssValue(deleteAlert, "color");
 	 }
 	 public String visibilityOfDeactivateAlertNotification() {
 		 generalutility=new GeneralUtility(driver);
 		 return generalutility.get_Attribute(deactivateAlert, "class");
 	 }
 		
-	 public String get_ColorOfSaveButton() {
+	 public String get_BackgroundColorOfDangerALert() {
 		 generalutility=new GeneralUtility(driver);
-		 return generalutility.get_CssValue(saveButton, "color");
+		 return generalutility.get_CssValue(alertMessage, "background-color");
 	 }
+	 public void clickOnSearchButton() {
+		 searchButton.click();
+	 }
+	 public void search_NameField(String name) {
+		searchName.sendKeys(name);
 		
-	 
-	
+	 }
+	 public void searchFieldButton() {
+		 pageutility=new PageUtility(driver);
+	     pageutility.scrollAndClick(searchFieldButton); 	
+	   
+	 }
+	 public String get_TextSearchName() {
+	   	 generalutility=new GeneralUtility(driver);
+	   	 return generalutility.get_Text(searchNameText);
+	 }
+	 public String get_TextDeletedData() {
+	   	 generalutility=new GeneralUtility(driver);
+	   	 return generalutility.get_Text(deleteDataReport);
+	 }	
 	
 }
 

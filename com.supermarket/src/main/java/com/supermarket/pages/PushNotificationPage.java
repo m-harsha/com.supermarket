@@ -1,5 +1,8 @@
 package com.supermarket.pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,29 +43,25 @@ public class PushNotificationPage {
 	}	
 	public void click_OnSend() {
 		sendButton.click();
-	}
-	
+	}	
 	public String get_SuccessAlertMessage(String title, String description) {
 		enter_TitleField(title);
 		enter_DescriptionField(description);
 		click_OnSend();
 		return get_AlertText();	
 	}
-	
 	public String get_AlertText() {
 		generalutility=new GeneralUtility(driver);
-		return generalutility.get_Text(alertSuccessText);
-		
+		return generalutility.get_Text(alertSuccessText);	
 	}
 	 public boolean is_AlertMessageDisplayed() {
 		 generalutility=new GeneralUtility(driver);
     	 return generalutility.is_Displayed(alertSuccessText);
 	 }
-	public String get_ColorOfSendButton() {
+	public String get_BackgroundColorOfAlert() {
 		 generalutility=new GeneralUtility(driver);
-		 return generalutility.get_CssValue(sendButton, "color");
+		 return generalutility.get_CssValue(alertSuccessText, "background-color");
 	 }
-	
 	 public String get_ColorOfAlert() {
 		 generalutility=new GeneralUtility(driver);
 		 return generalutility.get_CssValue( alertSuccessText, "color");
@@ -71,7 +70,12 @@ public class PushNotificationPage {
 		 generalutility=new GeneralUtility(driver);
 		 return generalutility.get_Attribute(alertSuccessText, "class");
 	 }
-	
-	
+	 public void enter_PushNotificationData(String titles,String descriptions) {
+		 List<String> list=new ArrayList<>();
+		 list.add(titles);
+		 list.add(descriptions);
+		 enter_TitleField(list.get(0));
+		 enter_DescriptionField(list.get(1));	 
+	 }	
 	
 }

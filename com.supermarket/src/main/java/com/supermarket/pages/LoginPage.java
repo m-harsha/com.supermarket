@@ -2,6 +2,7 @@ package com.supermarket.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -14,10 +15,13 @@ public class LoginPage {
 	Excel excel=new Excel();
 	GeneralUtility generalutility;
 	
+	@CacheLookup
 	@FindBy(xpath="//input[@name='username']")
 	private WebElement userName;
+	@CacheLookup
 	@FindBy(xpath="//input[@name='password']")
 	private WebElement password;
+	@CacheLookup
 	@FindBy(xpath="//button[text()='Sign In']")
 	private WebElement signIn;
 	@FindBy(xpath="//img[@class='img-circle']")		
@@ -38,7 +42,6 @@ public class LoginPage {
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}
-	
 	public void enterUserName(String UserName) {
 		userName.sendKeys(UserName);
 	}
@@ -60,13 +63,11 @@ public class LoginPage {
 		userName=excel.getCellData(0, 0);
 		password=excel.getCellData(0, 1);
 		login(userName,password);
-	}
-	
+	}	
     public boolean is_ProfileImageDisplayed() {
 	    generalutility=new GeneralUtility(driver);
 	    return generalutility.is_Displayed(profileImage);		
-	}
-    
+	}  
     public String get_AlertMessageNotification() {
     	generalutility=new GeneralUtility(driver);
     	return generalutility.get_Text(alertMessage);
@@ -89,8 +90,5 @@ public class LoginPage {
     	generalutility=new GeneralUtility(driver);
     	return generalutility.get_Text(signInText);
     }
-   
-   
-
 
 }

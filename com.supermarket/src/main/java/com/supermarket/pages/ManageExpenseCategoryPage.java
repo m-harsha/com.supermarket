@@ -38,8 +38,13 @@ public class ManageExpenseCategoryPage {
 	private WebElement searchTitle;
 	@FindBy(xpath="//button[@name='Search']")
 	private WebElement searchData;
-	@FindBy(xpath="//h1[text()='Add Expense Category']")
-	private WebElement expenseText;
+	@FindBy(xpath="//tbody//tr//td")
+	private WebElement expenseTable;
+	@FindBy(xpath="//tbody//tr//td")
+	private WebElement searchTable;
+	@FindBy(xpath="//span[@id='res']")
+	private WebElement deletedDataReport;
+	
 	
 	public ManageExpenseCategoryPage(WebDriver driver) {
 		this.driver=driver;
@@ -72,7 +77,7 @@ public class ManageExpenseCategoryPage {
 		 generalutility=new GeneralUtility(driver);
 		 return generalutility.get_Attribute(alertMessage, "class");
 	 }
-	 public String get_ColorDangerAlert() {
+	 public String get_ColorOfAlertMessage() {
 		 generalutility=new GeneralUtility(driver);
 		 return generalutility.get_CssValue(alertMessage, "color");
 	 }
@@ -112,14 +117,7 @@ public class ManageExpenseCategoryPage {
 	 public void updateButton() {
 		 editUpdateButton.click();
 	 }
-	 public String get_FontSizeOfUpdateButton() {
-		 generalutility=new GeneralUtility(driver);
-		 return generalutility.get_CssValue(editUpdateButton, "font-size");
-	 }
-	 public String get_FontStyleOfDeleteButton() {
-		 generalutility=new GeneralUtility(driver);
-		 return generalutility.get_CssValue(editUpdateButton, "font-style");
-	 }
+	
 	 public boolean updatedAlertMessage_IsDisplayed() {
 	  	 generalutility=new GeneralUtility(driver);
 	  	 return generalutility.is_Displayed(updatedAlertMessage);
@@ -137,21 +135,20 @@ public class ManageExpenseCategoryPage {
 		 }
 		 WebElement deactivateactionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[2]//a)[2]"));
 		 deactivateactionButton.click();
-		// driver.switchTo().alert().accept();
-		driver.switchTo().alert().dismiss();	 
+		driver.switchTo().alert().accept(); 
 	 }
-	
 	 public boolean deleteAlertMessage_isDisplayed() {
 	     generalutility=new GeneralUtility(driver);
 	  	 return generalutility.is_Displayed(deleteAlert);
 	 }
+	 public String get_ReportOfDeletedData() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.get_Text(deletedDataReport);
+	 }
 	 public void clickSearchButton() {
 		 searchButton.click();	   
 	 }
-	 public String get_ColorSearchButton() {
-		 generalutility=new GeneralUtility(driver);
-		 return generalutility.get_CssValue(searchButton, "color");
-	 }
+	
 	 public void searchedTitle(String title) {
 		clickSearchButton();
 		searchTitle.sendKeys(title);
@@ -160,9 +157,13 @@ public class ManageExpenseCategoryPage {
 		 searchData.click();	
      }
 	
-	 public String get_TextExpenseCategory() {
+	 public boolean expenseCategoryDetails_isDisplayed() {
 		 generalutility=new GeneralUtility(driver);
-		 return generalutility.get_Text(expenseText);
+		 return generalutility.is_Displayed(expenseTable);
+	 }
+	 public boolean SearchedData_isDisplayed() {
+		 generalutility=new GeneralUtility(driver);
+    	 return generalutility.is_Displayed(searchTable);
 	 }
 	 
 	 

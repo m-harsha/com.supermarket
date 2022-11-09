@@ -2,12 +2,19 @@ package com.supermarket.base;
 
 import org.testng.annotations.DataProvider;
 
+import com.supermarket.utilities.Excel;
+
 public class DataProviderClass {
+	Excel excel;
 	
-	@DataProvider (name="pushnotification")
-	public  Object[][]  supermarket() {
-		return new Object [][] {{"abc","erty"},{"erh","rtyry"}};	
+	@DataProvider (name="PushNotificationExcelData")
+	public  Object[][]  push_Notification() {
+		excel=new Excel();
+		excel.setExcelFile("Push Notification","PushNotificationInformations");
+		return excel.getMultiDimensionalArray(3, 2);
+			
 	}
+	
 	
 	@DataProvider (name="DeliveryBoy")
 	public  Object[][]  details() {

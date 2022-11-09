@@ -34,6 +34,10 @@ public class AdminUsersPage {
 	private WebElement alertMessage;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")		
 	private WebElement statusAlertMessage;
+	@FindBy(xpath="//img[@class='img-circle']")		
+	private WebElement profileImage;
+	@FindBy(xpath="//i[@class='ace-icon fa fa-power-off']")		
+	private WebElement logout;
 	
 	
 	public AdminUsersPage(WebDriver driver) {
@@ -52,9 +56,9 @@ public class AdminUsersPage {
 	public void enterPassword(String password) {
 	    Password.sendKeys(password);
 	}
-	public void enterUserType() {
+	public void enterUserType(int a) {
     	pageutility=new PageUtility(driver);
-    	pageutility.select_ByIndex(2,userType);
+    	pageutility.select_ByIndex(a,userType);
     }
 	public void clickOnSaveButton() {
 		saveButton.click();
@@ -64,8 +68,6 @@ public class AdminUsersPage {
 		clickOnNewButton();
 		enterUserName(userName);
 		enterPassword(password);
-		enterUserType();
-		clickOnSaveButton();	
 	}	
 	 public String visibilityOfAlertNotification() {
 		 generalutility=new GeneralUtility(driver);
@@ -98,5 +100,13 @@ public class AdminUsersPage {
 		 generalutility=new GeneralUtility(driver);
 		 return generalutility.get_CssValue(statusAlertMessage, "color");
 	 }
+	 public void clickOnLogout() {
+		 profileImage.click();
+		 logout.click();	 
+	 }
+	 public boolean is_ProfileNameDisplayed() {
+		 generalutility=new GeneralUtility(driver);
+		 return generalutility.is_Displayed(profileImage);		
+	}
 
 }

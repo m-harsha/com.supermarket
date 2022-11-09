@@ -84,9 +84,9 @@ public class ManageUsersPage {
     	 return generalutility.is_Displayed(deactivateAlert);
 	 }
 	 public String get_AlertMessageNotification() {
-	    	generalutility=new GeneralUtility(driver);
-	    	return generalutility.get_Text(deactivateAlert);
-	    }
+	    generalutility=new GeneralUtility(driver);
+	    return generalutility.get_Text(deactivateAlert);
+	 }
 	 public boolean is_DeleteAlertMessageDisplayed() {
 		 generalutility=new GeneralUtility(driver);
     	 return generalutility.is_Displayed(deleteAlert);

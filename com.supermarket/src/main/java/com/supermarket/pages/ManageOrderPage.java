@@ -31,7 +31,7 @@ public class ManageOrderPage {
 	@FindBy(xpath="//i[@class='fas fa-arrow-left']")
 	private WebElement backButton;
 	@FindBy(xpath="//h1[@class='m-0 text-dark']")
-	private WebElement listOrderText;
+	private WebElement orderDetails;
 	
 	public ManageOrderPage(WebDriver driver) {
 		this.driver=driver;
@@ -55,19 +55,19 @@ public class ManageOrderPage {
 		 WebElement deliveryBoyButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[6]//a)[3]"));
 		 deliveryBoyButton.click();
 	 }
-	public void selectDeliveryBoy(String usersName) {
+	public void selectDeliveryBoy(String usersName,int c) {
 		click_ManageOrder();
 		assignDeliveryBoyData(usersName);
 		updateDeliveryBoy.click();
 		pageutility=new PageUtility(driver);
-		pageutility.select_ByIndex(4,updateDeliveryBoy);
+		pageutility.select_ByIndex(c,updateDeliveryBoy);
 	}
 	public void click_UpdateButton() {
 		updateButton.click();
 	}
-	 public String get_ColorOfAssignDeliveryBoy() {
+	 public String get_ColorOfAlertMessage() {
 		 generalutility=new GeneralUtility(driver);
-		 return generalutility.get_CssValue(updateDeliveryBoy, "color");
+		 return generalutility.get_CssValue(alertMessage, "color");
 	 }
 	 public void viewListData(String usersName) {
 			int j=0;
@@ -87,9 +87,9 @@ public class ManageOrderPage {
 	 public void click_BackButton() {
 		backButton.click();
     }
-	 public String get_TextOfListOrder() {
+	 public String get_TextOfOrderDetails() {
 		 generalutility=new GeneralUtility(driver);
-		 return generalutility.get_Text(listOrderText);
+		 return generalutility.get_Text(orderDetails);
 	 }
 
 	

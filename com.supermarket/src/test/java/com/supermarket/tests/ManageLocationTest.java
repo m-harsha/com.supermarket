@@ -22,8 +22,11 @@ public class ManageLocationTest extends Base {
 		loginpage=new LoginPage(driver);
 		loginpage.login();		
 		managelocation=new ManageLocationPage(driver);
+		managelocation.clickOnManageLocation();
+		managelocation.clickOnNewButton();
+		managelocation.enterTheCountry(1);
+		managelocation.enterTheState(2);
 		managelocation.ManageLocationDetails(location,deliverycharge);
-		managelocation.get_AlertMessageNotification();
 		String actualresult=managelocation.visibilityOfAlertNotification();
 		String expectedresult=Constants.EXPECTED_LOCATIONALERT;
 		Assert.assertEquals(actualresult,expectedresult);
@@ -37,7 +40,6 @@ public class ManageLocationTest extends Base {
 		managelocation.clickOnManageLocation();
 		managelocation.deactivate_UserStatus("kerala");
 		managelocation.get_StatusAlertMessageNotification();
-		managelocation.statusAlertMessage_isDisplayed();
 		String actualbackgroundcolor=managelocation.get_BackgroundcolorDeactivateAlert();
 		String expectedbackgroundcolor=Constants.EXPECTEDBACKGROUNDCOLOR_DEACTIVATEALERT;
 		Assert.assertEquals(actualbackgroundcolor, expectedbackgroundcolor);		
@@ -50,39 +52,33 @@ public class ManageLocationTest extends Base {
 		managelocation=new ManageLocationPage(driver);
 		managelocation.clickOnManageLocation();
 		managelocation.delete_Location("kerala");
-		managelocation.deleteAlertMessage_isDisplayed();
-		String actualfontstyle=managelocation. get_FontStyleOfDeleteButton();
-		String expectedfontstyle=Constants.EXPECTEDSTYLE_DELETEALERT;
-		Assert.assertEquals(actualfontstyle, expectedfontstyle);
+		Assert.assertTrue(managelocation.deleteAlertMessage_isDisplayed());
 	}
 	
 	@Test
-	public void verify_UpdateDetailsOfManageLocation() {
+	public void verify_UpdateFunctionalityOfLocation() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		managelocation=new ManageLocationPage(driver);
 		managelocation.clickOnManageLocation();	
-		managelocation.enter_StateDataUpdation("Street7");	
+		managelocation.enter_StateDataUpdation("Street7",5);	
 		managelocation.updateButton();
-		managelocation.updatedAlertMessage_IsDisplayed();
-		String actualcolor=managelocation.get_ColorOfUpdateButton();
+		String actualcolor=managelocation.get_ColorOfUpdateAlertMessage();
 		String expectedcolor=Constants.EXPECTEDCOLOR_UPDATEALERT;
 		Assert.assertEquals(actualcolor, expectedcolor);		
 	}
 	
 	@Test
-	public void verify_SearchedDataOfManageLocation() {
+	public void verify_Search_Location() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		managelocation=new ManageLocationPage(driver);
 		managelocation.clickOnManageLocation();	
 		managelocation.clickSearchButton();
-		managelocation.search_CategoriesOfManageLocation();
+		managelocation.search_CategoriesOfManageLocation(1,2);
 		managelocation.entersearchedLocation("tvm");
 		managelocation.click_SearchButtonManageLocation();
-		String actualbackgroundcolor=managelocation.get_BackgroundcolorOfSearchButton();
-		String expectedbackgroundcolor=Constants.EXPECTEDBACKGROUNDCOLOR_SEARCH;
-		Assert.assertEquals(actualbackgroundcolor, expectedbackgroundcolor);		
+		Assert.assertTrue(managelocation.is_DisplayedSearchedData());	
 	}
 	
 	@Test
@@ -90,10 +86,13 @@ public class ManageLocationTest extends Base {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		managelocation=new ManageLocationPage(driver);
+		managelocation.clickOnManageLocation();
+		managelocation.clickOnNewButton();
+		managelocation.enterTheCountry(1);
+		managelocation.enterTheState(2);
 		managelocation.ManageLocationDetails("kerala","75");
 		String expectedresult=Constants.EXPECTED_ALERTTEXT;
 		String actualresult=managelocation.get_AlertMessageNotification();
-		System.out.println(actualresult);
 		Assert.assertEquals(actualresult, expectedresult,"This testcase failed");
 	}
 	

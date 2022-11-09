@@ -14,7 +14,7 @@ public class ManageExpenseTest extends Base {
 	Excel excel=new Excel();
 	ManageExpensePage manageexpensepage;
 	
-	@Test
+	@Test(priority=1)
 	public void verify_EnterNewExpenseInformations() {
 		excel.setExcelFile("ManageExpenses","ManageExpenseInformations");
 		String amount=excel.getCellData(0,0);
@@ -22,59 +22,75 @@ public class ManageExpenseTest extends Base {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		manageexpensepage=new ManageExpensePage(driver);
-		manageexpensepage.enter_PageInformations(amount, remarks);
+		manageexpensepage.clickOnNewExpense();
+		manageexpensepage.clickOnUserType(2);
+		manageexpensepage.clickOnCategory(2);
+		manageexpensepage.clickOnOrderId(3);
+		manageexpensepage.clickOnPurchaseId(3);
+		manageexpensepage.clickOnExpenseType(4);
+		manageexpensepage.enterAmount(amount);
+		manageexpensepage.enterRemarks(remarks);
 		manageexpensepage.fileUpload(Constants.USERFILE_UPLOAD +"\\Grocery.pdf");
 		manageexpensepage.clickOnSaveButton();
 		String actualresult=manageexpensepage.visibilityOfAlertNotification();
 		String expectedresult=Constants.EXPECTED_EXPENSEALERT;
 		Assert.assertEquals(actualresult,expectedresult);
 	}
-		
-	
-	@Test
-	public void verify_ManageExpenseFunctionalities() {
+			
+	@Test(priority=2)
+	public void verify_CreateExpenseData() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		manageexpensepage=new ManageExpensePage(driver);
-		manageexpensepage.enter_PageInformations("2000", "Amount is paid");
+		manageexpensepage.clickOnNewExpense();
+		manageexpensepage.clickOnUserType(2);
+		manageexpensepage.clickOnCategory(2);
+		manageexpensepage.clickOnOrderId(3);
+		manageexpensepage.clickOnPurchaseId(3);
+		manageexpensepage.clickOnExpenseType(4);
+		manageexpensepage.enterAmount("2000");
+		manageexpensepage.enterRemarks("Amount is paid");
 		manageexpensepage.fileUpload(Constants.USERFILE_UPLOAD +"\\Grocery.pdf");
 		manageexpensepage.clickOnSaveButton();
-		String actualcolor=manageexpensepage.get_ColorOfSaveButton();
-		String expectedcolor=Constants.EXPECTEDCOLOR_SAVE_EXPENSE;
+		String actualcolor=manageexpensepage.get_BackgroundColorOfAlertMessage();
+		String expectedcolor=Constants.EXPECTED_BACKGROUNDCOLOR_ALERT;
 		Assert.assertEquals(actualcolor, expectedcolor);		
 	}
 	
-	@Test
-	public void verify_UpdateDetailsOfManageExpense() {
+	@Test(priority=3)
+	public void verify_UpdateFunctionalityOfExpenseData() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		manageexpensepage=new ManageExpensePage(driver);
 		manageexpensepage.clickOnManageExpense();
 		manageexpensepage.clickOnExpense();
 		manageexpensepage.edit_ExpenseData("Icecream_21_09_2022_01_20 (232-ST)");
-		manageexpensepage.enter_OrderIdDataUpdation();
+		manageexpensepage.enter_OrderIdDataUpdation(9);
 		manageexpensepage.updateButton();
 		String actualresult=manageexpensepage.visibilityOfUpdatedAlertNotification();
 		String expectedresult=Constants.EXPECTED_UPDATEALERT;
 		Assert.assertEquals(actualresult,expectedresult);
 	}
 	
-	@Test
-	public void verify_DeleteManageExpenseData() {
+	@Test(priority=4)
+	public void verify_DeleteExpenseData() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		manageexpensepage=new ManageExpensePage(driver);
 		manageexpensepage.clickOnManageExpense();
 		manageexpensepage.clickOnExpense();
-		manageexpensepage.delete_DataExpense("Order -406(Nyahgr-DB)");
-		manageexpensepage.deleteAlertMessage_isDisplayed();
-		String actualfontstyle=manageexpensepage. get_FontStyleOfDeleteButton();
-		String expectedfontstyle=Constants.EXPECTEDSTYLE_DELETE_EXPENSE;
-		Assert.assertEquals(actualfontstyle, expectedfontstyle);
+		manageexpensepage.delete_DataExpense("Cash From (Admin-AD)");
+		manageexpensepage.clickSearchButton();
+		manageexpensepage.search_EnterTitle("Cash From (Admin-AD)");
+		manageexpensepage.click_SearchButtonManageExpense();
+		manageexpensepage.click_ReportButtonManageExpense();
+		String actualtext=manageexpensepage. get_ReportOfDeletedData();
+		String expectedtext=Constants.EXPECTED_DATAREPORT;
+		Assert.assertEquals(actualtext, expectedtext);
 	}
 	
-	@Test
-	public void verify_SearchedDataOfManageExpense() {
+	@Test(priority=5)
+	public void verify_Search_ExpenseData() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		manageexpensepage=new ManageExpensePage(driver);
@@ -82,17 +98,11 @@ public class ManageExpenseTest extends Base {
 		manageexpensepage.clickOnExpense();
 		manageexpensepage.clickSearchButton();
 		manageexpensepage.search_EnterTitle("FruitNew (Staff-ST)");
-		manageexpensepage.search_CategoriesOfManageExpense();
 		manageexpensepage.click_SearchButtonManageExpense();
 		manageexpensepage.click_ReportButtonManageExpense();
-		manageexpensepage.click_BackButton();
-		String actualtext=manageexpensepage.get_TextListExpense();
-		String expectedtext=Constants.EXPECTED_EXPENSETEXT;
+		String actualtext=manageexpensepage.get_TextOfSearchedData();
+		String expectedtext=Constants.EXPECTED_EXPENSEREPORT;
 		Assert.assertEquals(actualtext, expectedtext);
-	}
-		
-		
-		
-	
+	}	
 
 }

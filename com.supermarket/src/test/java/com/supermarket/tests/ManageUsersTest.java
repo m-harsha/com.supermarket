@@ -18,31 +18,27 @@ public class ManageUsersTest extends Base {
 		manageuser=new ManageUsersPage(driver);
 		manageuser.clickOnManageUsers();
 		manageuser.deactivate_UserStatus("Subina S");
-		Assert.assertTrue(manageuser.is_DeactivateActionAlertMessageDisplayed());
-		
+		Assert.assertTrue(manageuser.is_DeactivateActionAlertMessageDisplayed());		
     }
 	
 	@Test
-	public void verify_ManageUserActionDeactivation() {
+	public void verify_UserActionDeactivation() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		manageuser=new ManageUsersPage(driver);
 		manageuser.clickOnManageUsers();
 		manageuser.deactivate_UserAction("rex lex");
-		Assert.assertTrue(manageuser.is_DeactivateActionAlertMessageDisplayed());
-		
+		Assert.assertTrue(manageuser.is_DeactivateActionAlertMessageDisplayed());	
 	}
 	
 	@Test
-	public void verify_DeleteManageUserData() {
+	public void verify_DeleteUserData() {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		manageuser=new ManageUsersPage(driver);
 		manageuser.clickOnManageUsers();
 		manageuser.delete_ManageUser("Riyanka M");
-		Assert.assertTrue(manageuser.is_DeleteAlertMessageDisplayed());
-		
-		
+		Assert.assertTrue(manageuser.is_DeleteAlertMessageDisplayed());	
 	}
 	
 }

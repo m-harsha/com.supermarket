@@ -85,22 +85,22 @@ public class ManageProductPage {
 	public void enterTag(String tag) {
 		tagName.sendKeys(tag);
 	}
-	public void clickOnCategory() {
+	public void clickOnCategory(int a) {
 		category.click();
 		pageutility=new PageUtility(driver);
-		pageutility.select_ByIndex(2, category);
+		pageutility.select_ByIndex(a, category);
 	}
-	public void clickOnSubCategory() {
+	public void clickOnSubCategory(String name) {
 		waitutility=new WaitUtility(driver);
 		waitutility.element_ToBeClickable(10L, "//select[@id='sub_id']");	
 		subCategory.click();
 		pageutility=new PageUtility(driver);
-		pageutility.select_ByVisibleText("Atta & Flours",subCategory );
+		pageutility.select_ByVisibleText(name,subCategory );
 	}
-	public void clickOnGroup() {
+	public void clickOnGroup(int b) {
 		groupId.click();
 		pageutility=new PageUtility(driver);
-		pageutility.select_ByIndex(1, groupId);
+		pageutility.select_ByIndex(b, groupId);
 	}
 	public void clickOnPriceType() {
 		priceType.click();
@@ -108,10 +108,10 @@ public class ManageProductPage {
 	public void enterWeightValue(String weight) {
 		weightValue.sendKeys(weight);
 	}
-	public void clickOnWeightUnit() {
+	public void clickOnWeightUnit(int d) {
 		weightUnit.click();
 		pageutility=new PageUtility(driver);
-		pageutility.select_ByIndex(1, weightUnit);
+		pageutility.select_ByIndex(d, weightUnit);
 	}
 	public void enterMaximunQuantity(String quantity) {
 		maxQuantity.sendKeys(quantity);
@@ -139,18 +139,18 @@ public class ManageProductPage {
 		pageutility=new PageUtility(driver);
     	pageutility.scrollAndClick(stockBox); 
 	}
-	public void enterProductDetails(String title,String tag,String weight,String quantity,String Price,String mrp,String stock,String purchase,String des) {
+	public void enterProductDetails(String title,String tag,int a,String name,int b,String weight,int d,String quantity,String Price,String mrp,String stock,String purchase,String des) {
 		clickOnManageProduct();
 		clickOnNewButton();
 		enterTitle(title);
 		enterProductType();
 		enterTag(tag);
-		clickOnCategory();
-		clickOnSubCategory();
-		clickOnGroup();
+		clickOnCategory(a);
+		clickOnSubCategory(name);
+		clickOnGroup(b);
 		clickOnPriceType();
 		enterWeightValue(weight);
-		clickOnWeightUnit();
+		clickOnWeightUnit(d);
 		enterMaximunQuantity(quantity);
 		enterThePrice(Price);
 		enterTheMrp(mrp);
@@ -179,18 +179,6 @@ public class ManageProductPage {
 	 public String visibilityOfAlertNotification() {
 		 generalutility=new GeneralUtility(driver);
 		 return generalutility.get_Attribute(alertMessage, "class");
-	}
-	 
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 
 }

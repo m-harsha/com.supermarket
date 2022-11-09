@@ -26,12 +26,10 @@ public class Excel {
 
 			workbook = new XSSFWorkbook(fi);
 			sheet = workbook.getSheet(SheetName);
-
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}	
 }
 	public String getCellData(int rowNo, int columnNo) {
 		row = sheet.getRow(rowNo);
@@ -53,6 +51,15 @@ public class Excel {
 
 		}
 
+	}
+	public Object[][] getMultiDimensionalArray(int row,int col) {
+		Object data[][]=new Object[row][col];
+		for(int i=0;i<row;i++) {
+			for(int j=0;j<col;j++) {
+				data[i][j]=getCellData(i,j);
+			}
+		}
+		return data;
 	}
 
 }
