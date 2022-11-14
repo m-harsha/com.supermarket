@@ -14,19 +14,21 @@ import com.supermarket.pages.LoginPage;
 public class ManageDeliveryBoyTest extends Base {
 	LoginPage loginpage;
 	Excel excel=new Excel();
+	GeneralUtility generalutility;
 	ManageDeliveryBoyPage deliveryboypage;
 	
 	@Test(priority=1)
 	public void verify_Add_NewDeliveryBoy() {
 		excel.setExcelFile("Delivery Boy Details","DeliveryBoyInformations");
-		String name=excel.getCellData(0,0);
+		String timeStamp=generalutility.get_TimeStamp();
+		String name=excel.getCellData(0,0)+"_"+timeStamp;
 		String email=excel.getCellData(0,1);
-		String phone=excel.getCellData(0,2);
-		String address=excel.getCellData(0,3);
-		String userName=excel.getCellData(0,4);
-		String password=excel.getCellData(0,5);	
+		String phone=excel.getCellData(0,2)+"_"+timeStamp;
+		String address=excel.getCellData(0,3)+"_"+timeStamp;
+		String userName=excel.getCellData(0,4)+"_"+timeStamp;
+		String password=excel.getCellData(0,5)+"_"+timeStamp;	
 		loginpage=new LoginPage(driver);
-		loginpage.login();	
+		loginpage.login();
 		deliveryboypage=new ManageDeliveryBoyPage(driver);
 		deliveryboypage.create_DeliveryBoy(name,email,phone,address,userName,password);
 		String actualresult=deliveryboypage.visibilityOfAlertNotification();
@@ -52,9 +54,9 @@ public class ManageDeliveryBoyTest extends Base {
 		loginpage.login();
 		deliveryboypage=new ManageDeliveryBoyPage(driver);
 		deliveryboypage.clickOnDeliveryBoy();
-		deliveryboypage.delete_DeliveryBoy("devi07_11_2022_08_52_16");
+		deliveryboypage.delete_DeliveryBoy("user1998");
 		deliveryboypage.clickOnSearchButton();
-		deliveryboypage.search_NameField("devi07_11_2022_08_52_16");
+		deliveryboypage.search_NameField("user1998");
 		deliveryboypage.searchFieldButton();
 		String expectedresult=Constants.EXPECTEDRESULT_DELETEDATA;
 		String actualresult=deliveryboypage.get_TextDeletedData();

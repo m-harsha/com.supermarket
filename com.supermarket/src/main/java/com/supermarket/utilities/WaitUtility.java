@@ -18,10 +18,17 @@ public class WaitUtility {
 	
 	public static final long IMPLICIT_WAIT=10;
 	public static final long PAGE_LOAD_WAIT=20;
+	
 	public void element_ToBeClickable(long seconds,String xpath) {
 		wait=new WebDriverWait(driver,Duration.ofSeconds(seconds));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 	}
+	
+	public void visibility_OfElementLocated(long seconds,String xpath) {
+		wait=new WebDriverWait(driver,Duration.ofSeconds(seconds));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+	}
+	
 	
 
 }

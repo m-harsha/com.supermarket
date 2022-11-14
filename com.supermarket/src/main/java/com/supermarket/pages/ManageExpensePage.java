@@ -219,6 +219,8 @@ public class ManageExpensePage {
 	   return generalutility.get_Text(deletedDataReport);
    }
    public void clickSearchButton() {
+	   waitutility=new WaitUtility(driver);
+	   waitutility.visibility_OfElementLocated(10L,"//a[@class='btn btn-rounded btn-primary']");	
 	   searchButton.click();	   
    }
    public void search_EnterTitle(String name) {

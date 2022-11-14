@@ -46,7 +46,7 @@ public class Constants {
    /**ManageDeliveryBoy page**/
 	
 	public static final String EXPECTED_DEACTIVATEALERT="alert alert-success alert-dismissible";
-	public static final String EXPECTED_ALERT="alert alert-danger alert-dismissible";
+	public static final String EXPECTED_ALERT="alert alert-success alert-dismissible";
 	public static final String EXPECTEDRESULT_DELETEDATA=".........RESULT NOT FOUND.......";
 	public static final String EXPECTEDRESULT_SEARCHNAME="Anamik_";
 	public static final String EXPECTEDBACKGROUNDCOLOR_DANGERALERT="rgba(220, 53, 69, 1)";
@@ -80,7 +80,7 @@ public class Constants {
    /**AdminUsers page**/
 	
 	public static final String EXPECTED_ALERTTEXT3="Alert!";
-	public static final String EXPECTED_ADMINALERT="alert alert-danger alert-dismissible";
+	public static final String EXPECTED_ADMINALERT="alert alert-success alert-dismissible";
 	public static final String EXPECTEDBACKGROUNDCOLOR_ALERT="rgba(255, 255, 255, 1)";
 	
 	

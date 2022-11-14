@@ -27,7 +27,7 @@ public class ManageUsersTest extends Base {
 		loginpage.login();
 		manageuser=new ManageUsersPage(driver);
 		manageuser.clickOnManageUsers();
-		manageuser.deactivate_UserAction("rex lex");
+		manageuser.deactivate_UserAction("jothish thachamoochikkal");
 		Assert.assertTrue(manageuser.is_DeactivateActionAlertMessageDisplayed());	
 	}
 	

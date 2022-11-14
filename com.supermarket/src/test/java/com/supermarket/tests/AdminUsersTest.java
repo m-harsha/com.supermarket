@@ -9,17 +9,20 @@ import com.supermarket.constants.Constants;
 import com.supermarket.pages.AdminUsersPage;
 import com.supermarket.pages.LoginPage;
 import com.supermarket.utilities.Excel;
+import com.supermarket.utilities.GeneralUtility;
 
 public class AdminUsersTest extends Base {
 	Excel excel=new Excel();
 	LoginPage loginpage;
 	AdminUsersPage adminuserspage;
+	GeneralUtility generalutility;
 	
 	@Test
 	public void verify_CreateNewAdminUsers() {
 		excel.setExcelFile("Admin Users Details","AdminUsersInformations");
-		String userName=excel.getCellData(0, 0);
-		String password=excel.getCellData(0, 1);	
+		String timeStamp=generalutility.get_TimeStamp();
+		String userName=excel.getCellData(0, 0)+"_"+timeStamp;
+		String password=excel.getCellData(0, 1)+"_"+timeStamp;	
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
@@ -37,7 +40,7 @@ public class AdminUsersTest extends Base {
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.clickOnAdminUsers();
-		adminuserspage.deactivate_UserAction("terry@20");
+		adminuserspage.deactivate_UserAction("user1668324274965");
 		adminuserspage.statusAlertMessage_isDisplayed();
 		String actualcolor=adminuserspage.get_BackgroundColorOfAlertMessage();
 		String expectedcolor=Constants.EXPECTEDBACKGROUNDCOLOR_ALERT;

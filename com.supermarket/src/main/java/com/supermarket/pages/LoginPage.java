@@ -38,7 +38,7 @@ public class LoginPage {
 	private WebElement signInText;
 	
 		
-	public LoginPage(WebDriver driver) {
+	public LoginPage(WebDriver driver ) {
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}

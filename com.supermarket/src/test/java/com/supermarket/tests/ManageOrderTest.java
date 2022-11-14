@@ -17,7 +17,7 @@ public class ManageOrderTest extends Base {
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		manageorder=new ManageOrderPage(driver);
-		manageorder.selectDeliveryBoy("405",4);
+		manageorder.selectDeliveryBoy("403",4);
 		manageorder.click_UpdateButton();
 		String actualcolor=manageorder.get_ColorOfAlertMessage();	
 		String expectedcolor=Constants.EXPECTEDCOLOR_ASSIGNDELIVERYBOYALERT;
@@ -30,7 +30,7 @@ public class ManageOrderTest extends Base {
 		loginpage.login();
 		manageorder=new ManageOrderPage(driver);
 		manageorder.click_ManageOrder();
-		manageorder.viewListData("405");
+		manageorder.viewListData("403");
 		String actualtext=manageorder.get_TextOfOrderDetails();
 		String expectedtext=Constants.EXPECTED_TEXT_ORDER;
 		Assert.assertEquals(actualtext, expectedtext);	

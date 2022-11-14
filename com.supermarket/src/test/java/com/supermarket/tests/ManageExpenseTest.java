@@ -2,6 +2,7 @@ package com.supermarket.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import com.supermarket.base.Base;
 import com.supermarket.constants.Constants;
@@ -60,16 +61,17 @@ public class ManageExpenseTest extends Base {
 	@Test(priority=3)
 	public void verify_UpdateFunctionalityOfExpenseData() {
 		loginpage=new LoginPage(driver);
+		SoftAssert softassert=new SoftAssert();
 		loginpage.login();	
 		manageexpensepage=new ManageExpensePage(driver);
 		manageexpensepage.clickOnManageExpense();
 		manageexpensepage.clickOnExpense();
-		manageexpensepage.edit_ExpenseData("Icecream_21_09_2022_01_20 (232-ST)");
+		manageexpensepage.edit_ExpenseData("Order -403(-DB)");
 		manageexpensepage.enter_OrderIdDataUpdation(9);
 		manageexpensepage.updateButton();
 		String actualresult=manageexpensepage.visibilityOfUpdatedAlertNotification();
 		String expectedresult=Constants.EXPECTED_UPDATEALERT;
-		Assert.assertEquals(actualresult,expectedresult);
+		softassert.assertEquals(actualresult,expectedresult);
 	}
 	
 	@Test(priority=4)
@@ -79,9 +81,9 @@ public class ManageExpenseTest extends Base {
 		manageexpensepage=new ManageExpensePage(driver);
 		manageexpensepage.clickOnManageExpense();
 		manageexpensepage.clickOnExpense();
-		manageexpensepage.delete_DataExpense("Cash From (Admin-AD)");
+		manageexpensepage.delete_DataExpense("IceCreams (Sumesh-PT)");
 		manageexpensepage.clickSearchButton();
-		manageexpensepage.search_EnterTitle("Cash From (Admin-AD)");
+		manageexpensepage.search_EnterTitle("IceCreams (Sumesh-PT)");
 		manageexpensepage.click_SearchButtonManageExpense();
 		manageexpensepage.click_ReportButtonManageExpense();
 		String actualtext=manageexpensepage. get_ReportOfDeletedData();

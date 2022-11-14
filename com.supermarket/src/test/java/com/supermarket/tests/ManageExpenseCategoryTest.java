@@ -33,7 +33,7 @@ public class ManageExpenseCategoryTest extends Base {
 		loginpage=new LoginPage(driver);
 		loginpage.login();	
 		category=new ManageExpenseCategoryPage(driver);
-		category.expenseCategoryDetails("vegetables3");
+		category.expenseCategoryDetails("vegetables6");
 		String actualcolor=category.get_ColorOfAlertMessage();
 		String expectedcolor=Constants.EXPECTEDCOLOROFALERT;
 		Assert.assertEquals(actualcolor, expectedcolor);
@@ -46,7 +46,7 @@ public class ManageExpenseCategoryTest extends Base {
 		category=new ManageExpenseCategoryPage(driver);
 		category.clickOnManageExpense();
 		category.clickOnExpenseCategory();
-		category.enterUpdatedTitle("grapes","Grapess");
+		category.enterUpdatedTitle("Baby Food","Grapees");
 		category.updateButton();
 		Assert.assertTrue(category.updatedAlertMessage_IsDisplayed());
     }
@@ -58,8 +58,8 @@ public class ManageExpenseCategoryTest extends Base {
 		category=new ManageExpenseCategoryPage(driver);
 		category.clickOnManageExpense();
 		category.clickOnExpenseCategory();
-		category.delete_ManageExpenseCategory("orange11111");
-		category.searchedTitle("orange11111");
+		category.delete_ManageExpenseCategory("Beverages");
+		category.searchedTitle("Beverages");
 		category.click_SearchButtonExpenseCategory();
 		String actualtext=category. get_ReportOfDeletedData();
 		String expectedtext=Constants.EXPECTED_DATA;

@@ -30,7 +30,7 @@ public class AdminUsersPage {
 	private WebElement userType;
 	@FindBy(xpath="//button[@name='Create']")
 	private WebElement saveButton;
-	@FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']")		
+	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")		
 	private WebElement alertMessage;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")		
 	private WebElement statusAlertMessage;

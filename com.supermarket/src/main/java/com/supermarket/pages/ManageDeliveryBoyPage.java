@@ -34,7 +34,7 @@ public class ManageDeliveryBoyPage {
 	private WebElement passWord;
 	@FindBy(xpath="//button[@class='btn btn-danger']")
 	private WebElement saveButton;
-	@FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']")
+	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement alertMessage;
 	@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 	private WebElement deactivateAlert;

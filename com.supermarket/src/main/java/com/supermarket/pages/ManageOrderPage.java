@@ -62,7 +62,7 @@ public class ManageOrderPage {
 		pageutility=new PageUtility(driver);
 		pageutility.select_ByIndex(c,updateDeliveryBoy);
 	}
-	public void click_UpdateButton() {
+	public void click_UpdateButton() {	
 		updateButton.click();
 	}
 	 public String get_ColorOfAlertMessage() {

@@ -73,13 +73,14 @@ public class Base {
 	}
 	@AfterMethod(alwaysRun=true)
 	public void tearDown(ITestResult itestresult) {
+		driver.close();
 		screenshot=new ScreenShot();
 		if(itestresult.getStatus()==ITestResult.FAILURE) {
 			String testcaseName=itestresult.getName();
 			screenshot.take_screenShot(driver,testcaseName);
 		
 	}
-		//driver.close();
+		
 }
 	
 	
