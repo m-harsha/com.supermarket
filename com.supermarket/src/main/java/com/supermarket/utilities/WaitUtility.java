@@ -1,10 +1,12 @@
 package com.supermarket.utilities;
 
 import java.time.Duration;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WaitUtility {
@@ -29,6 +31,10 @@ public class WaitUtility {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 	}
 	
+	public void fluentWait(long timeOut) {
+		FluentWait wait=new FluentWait(driver);
+		wait.until(ExpectedConditions.alertIsPresent());
+		wait.ignoring(NoSuchElementException.class);	
+	}
 	
-
 }

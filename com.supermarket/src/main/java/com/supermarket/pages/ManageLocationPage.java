@@ -143,6 +143,8 @@ public class ManageLocationPage {
 		 }
 		 WebElement deleteActionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[6]//a)[2]"));
 		 deleteActionButton.click();
+		 waitutility=new WaitUtility(driver);
+		 waitutility.fluentWait(20L);
 		 driver.switchTo().alert().accept();	 
 	 }
 	 public boolean deleteAlertMessage_isDisplayed() {
